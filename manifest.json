@@ -1,0 +1,25 @@
+{
+	"manifest_version": 2,
+	"name": "AWS Tools",
+	"description": "A basic extension to check status of all CDIP deployables in AWS environments",
+	"version": "1.0",
+	"permissions": [
+        "storage",
+		"tabs",
+        "<all_urls>",
+        "activeTab"
+	],
+	"icons": { 
+		"16": "img/aws16.png",
+		"48": "img/aws48.png",
+		"128": "img/aws128.png" 
+	},
+	"browser_action": {
+		"default_icon": "img/aws128.png"
+	},
+	"background": {"scripts" : ["js/background.js"]},
+	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+	"web_accessible_resources": [
+		"img/*.png"
+	]
+}
