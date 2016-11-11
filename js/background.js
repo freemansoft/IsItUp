@@ -1,3 +1,3 @@
-chrome.browserAction.onClicked.addListener(function (tab) {
-    chrome.tabs.create({url: "./AWSEnvStatus.html"});
+chrome.browserAction.onClicked.addListener(function(tab) {
+    chrome.tabs.create({ url: "./hear.html" });
 });

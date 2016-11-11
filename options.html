@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HEAR Options</title>
+    <!-- Cascading Style Sheets -->
+    <link href="css/bootstrap.3.3.5.min.css" rel="stylesheet" />
+    <link href="css/bootstrap-theme.3.3.5.min.css" rel="stylesheet" />
+    <link href="css/hear.css" rel="stylesheet" />
+</head>
+
+<body>
+    <form class="form-horizontal">
+        <fieldset>
+            <!-- Form Name -->
+            <legend align="center">
+                HEAR Options
+            </legend>
+            <!-- JSON File-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="application">Application</label>
+                <div class="col-md-2">
+                    <input id="application" name="application" type="text" value="CDIP" placeholder="AGS Name" class="form-control input-md" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="allowIndividualRetry">
+                        Allow individual Retry
+                    </label>
+                <div class="col-md-4">
+                    <label class="radio-inline" for="allowIndividualRetry-0">
+                            <input type="radio" name="allowIndividualRetry" id="allowIndividualRetry-0" value="Yes"/>
+                            Yes
+                        </label>
+                    <label class="radio-inline" for="allowIndividualRetry-1">
+                            <input type="radio" name="allowIndividualRetry" id="allowIndividualRetry-1" value="No" checked="checked"/>
+                            No
+                        </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="allowAutomaticRefresh">
+                        Allow automatic page refresh
+                    </label>
+                <div class="col-md-4">
+                    <label class="radio-inline" for="allowAutomaticRefresh-0">
+                            <input type="radio" name="allowAutomaticRefresh" id="allowAutomaticRefresh-0" value="Yes"/>
+                            Yes
+                        </label>
+                    <label class="radio-inline" for="allowAutomaticRefresh-1">
+                            <input type="radio" name="allowAutomaticRefresh" id="allowAutomaticRefresh-1" value="No" checked="checked"/>
+                            No
+                        </label>
+                </div>
+            </div>
+            <div class="form-group" id="pageRefreshAfterId">
+                <label class="col-md-4 control-label" for="pageRefreshAfter">
+                        Refresh Page after?
+                    </label>
+                <div class="col-md-4">
+                    <input id="pageRefreshAfter" name="pageRefreshAfter" type="number" placeholder="30" class="form-control input-md" />
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <!-- Scripts -->
+    <script src="js/jquery.2.4.1.min.js"></script>
+    <script src="js/bootstrap.3.3.5.min.js"></script>
+    <script src="js/options.js"></script>
+
+</body>
+
+</html>
