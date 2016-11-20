@@ -1,150 +1,29 @@
-$(document).ready(function () {
-
   var notApplicable = "N/A";
   var gifLoadingEle = "<img src='./img/ajax-loader.gif'>";
   var healthResp = "Only Json is displayed";
 
-  var allowIndividualRetry = localStorage["allowIndividualRetry"];
-  var allowAutomaticRefresh=localStorage["allowAutomaticRefresh"];
-  var pushNotifications=localStorage["pushNotifications"];
-  var pageRefreshAfter=localStorage["pageRefreshAfter"];
-  var cfgTxt=localStorage["cfgTxt"];
+$(document).ready(function () {
 
+  // get configuraton values
+      // get values from localsync
+    chrome.storage.sync.get({
+        allowIndividualRetry: false,
+        allowAutomaticRefresh: false,
+        pushNotifications: false,
+        pageRefreshAfter: 30,
+        cfgTxt: ""
+    }, function (items) {
+        doProcess(items);
+    });
 
-  var configuration = [
-    {
-      "name": "Index",
-      "envs": [
-        {
-          "name": "dev",
-          "url": ""
-        },
-        {
-          "name": "int",
-          "url": ""
-        },
-        {
-          "name": "int3",
-          "url": ""
-        },
-        {
-          "name": "qa",
-          "url": ""
-        },
-        {
-          "name": "qa-uat",
-          "url": ""
-        },
-        {
-          "name": "qa-pm",
-          "url": ""
-        },
-        {
-          "name": "prod",
-          "url": ""
-        }
-      ]
-    },
-    {
-      "name": "Cabinet",
-      "envs": [
-        {
-          "name": "dev",
-          "url": ""
-        },
-        {
-          "name": "int",
-          "url": ""
-        },
-        {
-          "name": "int3",
-          "url": ""
-        },
-        {
-          "name": "qa",
-          "url": ""
-        },
-        {
-          "name": "qa-uat",
-          "url": ""
-        },
-        {
-          "name": "qa-pm",
-          "url": ""
-        },
-        {
-          "name": "prod",
-          "url": ""
-        }
-      ]
-    },
-    {
-      "name": "Dyno",
-      "envs": [
-        {
-          "name": "dev",
-          "url": ""
-        },
-        {
-          "name": "int",
-          "url": ""
-        },
-        {
-          "name": "int3",
-          "url": ""
-        },
-        {
-          "name": "qa",
-          "url": ""
-        },
-        {
-          "name": "qa-uat",
-          "url": ""
-        },
-        {
-          "name": "qa-pm",
-          "url": ""
-        },
-        {
-          "name": "prod",
-          "url": ""
-        }
-      ]
-    },
-    {
-      "name": "ERM",
-      "envs": [
-        {
-          "name": "dev",
-          "url": ""
-        },
-        {
-          "name": "int",
-          "url": ""
-        },
-        {
-          "name": "int3",
-          "url": ""
-        },
-        {
-          "name": "qa",
-          "url": ""
-        },
-        {
-          "name": "qa-uat",
-          "url": ""
-        },
-        {
-          "name": "qa-pm",
-          "url": ""
-        },
-        {
-          "name": "prod",
-          "url": "http://google.com"
-        }
-      ]
-    }
-  ];
+});
+
+function doProcess(items)
+{
+  var configuration = JSON.parse(items.cfgTxt);
+  if(!configuration){
+    return;
+  }
   var componentMap = {};
   // create a componentMap 
   for (i = 0; i < configuration.length; i++) {
@@ -172,7 +51,7 @@ $(document).ready(function () {
       if (value[i].url) {
         isitupHtml += ("<td><span id='" + spanId + "'>" + gifLoadingEle + "</span>");
         // if individual retry is allowed.
-        if(allowIndividualRetry){
+        if(items.allowIndividualRetry){
         isitupHtml += (" <span id='refreshId' data='" + spanId + "' class='status-code refresh glyphicon glyphicon-refresh'></span>");
         }
         isitupHtml += "</td>";
@@ -190,12 +69,12 @@ $(document).ready(function () {
   // now check health
   checkHealth(spanIdMap);
   // allow automatic refresh
-  if(allowAutomaticRefresh){
+  if(items.allowAutomaticRefresh){
     // refresh status every x seconds
     window.setInterval(function(){
       /// call your function here
       checkHealth(spanIdMap);
-    }, parseInt(pageRefreshAfter)); 
+    }, parseInt(items.pageRefreshAfter*1000)); 
   }
 
   $("span").click(function () {
@@ -229,8 +108,8 @@ $(document).ready(function () {
     $('#status-detail').show();
     $('#health').show();
   });
+}
 
-});
 /**
  * Check health of each url.
  */
@@ -264,7 +143,9 @@ function checkHealth(spanIdMap) {
           $('#' + key).attr('data', statusData);
           $('#' + key).text(jqXHR.status);
         }
+        if(items.sendNotification){
         sendNotification(notificationMessage);
+        }
       },
       complete: function () {
         $('#' + key).removeClass("loading");
@@ -277,8 +158,7 @@ function checkHealth(spanIdMap) {
    */
   function sendNotification(notificationMessage)
   {
-    // if enabled
-     if(pushNotifications){           
+       
        var options = {
          type: "basic",
          title: "Environment is Down",
@@ -287,6 +167,6 @@ function checkHealth(spanIdMap) {
        }
        chrome.notifications.create("", options, function (cb) {
        });
-    }
+    
   }
 };

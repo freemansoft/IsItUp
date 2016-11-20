@@ -1,7 +1,31 @@
 $(document).ready(function () {
 
+    var filePath;
 
-    // Use default value color = 'red' and likesColor = true.
+    $("input:file").change(function () {
+        filePath = $(this).val();
+        filePath = filePath.replace("C:\\fakepath\\", "");
+        if(filePath){
+            jQuery.get(filePath, function (data) {
+                var IS_JSON = true;
+                try {
+                    var json = $.parseJSON(data);
+                }
+                catch (err) {
+                    IS_JSON = false;
+                }
+                if(IS_JSON){
+                    $("textarea[name='cfgTxt']").val(data);
+                }else{
+                    alert("Invalid configuration Json file!!");
+                }
+                
+            });
+        }  
+    });
+
+
+    // get values from localsync
     chrome.storage.sync.get({
         allowIndividualRetry: false,
         allowAutomaticRefresh: false,
@@ -9,8 +33,16 @@ $(document).ready(function () {
         pageRefreshAfter: 30,
         cfgTxt: ""
     }, function (items) {
-  
-        $("textarea[name='cfgTxt']").val(items.cfgTxt);
+        if(items.cfgTxt){
+            $("textarea[name='cfgTxt']").val(items.cfgTxt);
+        }
+        else{
+            jQuery.get("conf/defaultConf.json", function (data) {
+                $("textarea[name='cfgTxt']").val(data);
+            });
+        }
+        
+
         if(items.allowIndividualRetry){
             $('#pageRefreshAfterId').show();
         }
@@ -52,7 +84,7 @@ $(document).ready(function () {
         var pushNotifications = ($("input[name=pushNotifications]:checked").val() === 'Yes');
         var pageRefreshAfter = $("input[name=pageRefreshAfter]").val();
         var cfgTxt = $("textarea[name=cfgTxt]").val();
-
+  
        
         chrome.storage.sync.set({
             allowIndividualRetry: allowIndividualRetry,
@@ -66,7 +98,10 @@ $(document).ready(function () {
             status.textContent = 'Options saved.';
             setTimeout(function () {
                 status.textContent = '';
-            }, 750);
+            }, 5000);
+            setTimeout(function(){
+                window.close();
+            }, 1000)
         });
 
     });

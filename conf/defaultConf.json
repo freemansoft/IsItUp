@@ -1,0 +1,134 @@
+ [
+    {
+      "name": "Index",
+      "envs": [
+        {
+          "name": "dev",
+          "url": ""
+        },
+        {
+          "name": "int",
+          "url": ""
+        },
+        {
+          "name": "int3",
+          "url": ""
+        },
+        {
+          "name": "qa",
+          "url": ""
+        },
+        {
+          "name": "qa-uat",
+          "url": ""
+        },
+        {
+          "name": "qa-pm",
+          "url": ""
+        },
+        {
+          "name": "prod",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "name": "Cabinet",
+      "envs": [
+        {
+          "name": "dev",
+          "url": ""
+        },
+        {
+          "name": "int",
+          "url": ""
+        },
+        {
+          "name": "int3",
+          "url": ""
+        },
+        {
+          "name": "qa",
+          "url": ""
+        },
+        {
+          "name": "qa-uat",
+          "url": ""
+        },
+        {
+          "name": "qa-pm",
+          "url": ""
+        },
+        {
+          "name": "prod",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "name": "Dyno",
+      "envs": [
+        {
+          "name": "dev",
+          "url": ""
+        },
+        {
+          "name": "int",
+          "url": ""
+        },
+        {
+          "name": "int3",
+          "url": ""
+        },
+        {
+          "name": "qa",
+          "url": ""
+        },
+        {
+          "name": "qa-uat",
+          "url": ""
+        },
+        {
+          "name": "qa-pm",
+          "url": ""
+        },
+        {
+          "name": "prod",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "name": "ERM",
+      "envs": [
+        {
+          "name": "dev",
+          "url": ""
+        },
+        {
+          "name": "int",
+          "url": ""
+        },
+        {
+          "name": "int3",
+          "url": ""
+        },
+        {
+          "name": "qa",
+          "url": ""
+        },
+        {
+          "name": "qa-uat",
+          "url": ""
+        },
+        {
+          "name": "qa-pm",
+          "url": ""
+        },
+        {
+          "name": "prod",
+          "url": "http://google.com"
+        }
+      ]
+    }
+  ];
