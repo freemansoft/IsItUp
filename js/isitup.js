@@ -20,6 +20,9 @@ $(document).ready(function () {
 
 function doProcess(items)
 {
+  if(!items.cfgTxt){
+    return;
+  }
   var configuration = JSON.parse(items.cfgTxt);
   if(!configuration){
     return;

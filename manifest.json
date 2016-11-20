@@ -1,6 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Is It Up",
+    "short_name": "Is It Up",
     "description": "Extension to check if environments are up",
     "version": "1.0",
     "permissions": [
