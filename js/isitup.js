@@ -1,30 +1,30 @@
-  var notApplicable = "N/A";
-  var gifLoadingEle = "<img src='./img/ajax-loader.gif'>";
-  var healthResp = "Only Json is displayed";
+var notApplicable = "N/A";
+var gifLoadingEle = "<img src='./img/ajax-loader.gif'>";
+var healthResp = "Only Json is displayed";
 
 $(document).ready(function () {
 
   // get configuraton values
-      // get values from localsync
-    chrome.storage.sync.get({
-        allowIndividualRetry: false,
-        allowAutomaticRefresh: false,
-        pushNotifications: false,
-        pageRefreshAfter: 30,
-        cfgTxt: ""
-    }, function (items) {
-        doProcess(items);
-    });
+  // get values from localsync
+  chrome.storage.sync.get({
+    allowIndividualRetry: false,
+    allowAutomaticRefresh: false,
+    pushNotifications: false,
+    pageRefreshAfter: 30,
+    cfgTxt: ""
+  }, function (items) {
+    doProcess(items);
+  });
 
 });
 
-function doProcess(items)
-{
-  if(!items.cfgTxt){
+function doProcess(items) {
+  if (!items.cfgTxt) {
+    chrome.tabs.create({ 'url': "/options.html" })
     return;
   }
   var configuration = JSON.parse(items.cfgTxt);
-  if(!configuration){
+  if (!configuration) {
     return;
   }
   var componentMap = {};
@@ -54,8 +54,8 @@ function doProcess(items)
       if (value[i].url) {
         isitupHtml += ("<td><span id='" + spanId + "'>" + gifLoadingEle + "</span>");
         // if individual retry is allowed.
-        if(items.allowIndividualRetry){
-        isitupHtml += (" <span id='refreshId' data='" + spanId + "' class='status-code refresh glyphicon glyphicon-refresh'></span>");
+        if (items.allowIndividualRetry) {
+          isitupHtml += (" <span id='refreshId' data='" + spanId + "' class='status-code refresh glyphicon glyphicon-refresh'></span>");
         }
         isitupHtml += "</td>";
         spanIdMap[spanId] = value[i].url;
@@ -70,14 +70,14 @@ function doProcess(items)
   // now update table 
   $('#isitupId').html(isitupHtml);
   // now check health
-  checkHealth(spanIdMap);
+  checkHealth(spanIdMap, items.pushNotifications);
   // allow automatic refresh
-  if(items.allowAutomaticRefresh){
+  if (items.allowAutomaticRefresh) {
     // refresh status every x seconds
-    window.setInterval(function(){
+    window.setInterval(function () {
       /// call your function here
-      checkHealth(spanIdMap);
-    }, parseInt(items.pageRefreshAfter*1000)); 
+      checkHealth(spanIdMap, items.pushNotifications);
+    }, parseInt(items.pageRefreshAfter * 1000));
   }
 
   $("span").click(function () {
@@ -97,14 +97,8 @@ function doProcess(items)
       checkHealth(healthMap);
       return;
     }
-    var IS_JSON = true;
-    try {
-      var json = $.parseJSON(spanData);
-    }
-    catch (err) {
-      IS_JSON = false;
-    }
-    if (!IS_JSON) {
+    var isJson = isDataJson(spanData);
+    if (!isJson) {
       spanData = "Not JSON";
     }
     $('#status-detail').html(spanData);
@@ -116,38 +110,47 @@ function doProcess(items)
 /**
  * Check health of each url.
  */
-function checkHealth(spanIdMap) {
-  var notificationMessage="";
+function checkHealth(spanIdMap, pushNotifications) {
   // now fire all url's and callback will update span with corresponding style and the content.
   $.each(spanIdMap, function (key, value) {
     $.ajax({
       url: value,
       type: 'GET',
       success: function (data) {
-        data.url = value;
+        var spanData = "";
+        if (isDataJson(data)) {
+          data.url = value;
+          spanData = stringify(data);
+        } else {
+          var jsonObj = {};
+          jsonObj.url = value;
+          spanData = stringify(jsonObj);
+        }
         $('#' + key).addClass("status-code success");
-        $('#' + key).attr('data', data);
+        $('#' + key).attr('data', spanData);
         $('#' + key).text("200");
       },
       error: function (jqXHR, error, errorThrown) {
-        notificationMessage += (key + " = " + value + "\n");
+        errMsg = "";
         if (jqXHR.status) {
           var statusData = {};
           statusData.error = errorThrown;
+          errMsg += "with error '"+errorThrown+"' \n";
           statusData.url = value;
           $('#' + key).addClass("status-code error");
-          $('#' + key).attr('data', statusData);
+          $('#' + key).attr('data', stringify(statusData));
           $('#' + key).text(jqXHR.status);
         } else {
           var statusData = {};
           statusData.error = 'Failed to send xmlhttprequest';
           statusData.url = value;
           $('#' + key).addClass("status-code error");
-          $('#' + key).attr('data', statusData);
+          $('#' + key).attr('data', stringify(statusData));
           $('#' + key).text(jqXHR.status);
         }
-        if(items.sendNotification){
-        sendNotification(notificationMessage);
+        errMsg += "URL is " + value;
+        if (pushNotifications) {
+          sendNotification((key +" is down!!!"), errMsg);
         }
       },
       complete: function () {
@@ -156,20 +159,42 @@ function checkHealth(spanIdMap) {
     });
   });
 
-  /**
-   * Send Notification
-   */
-  function sendNotification(notificationMessage)
-  {
-       
-       var options = {
-         type: "basic",
-         title: "Environment is Down",
-         iconUrl: 'img/isitup16.png',
-         message: (notificationMessage)
-       }
-       chrome.notifications.create("", options, function (cb) {
-       });
-    
-  }
 };
+
+/**
+ * Send Notification
+ */
+function sendNotification(title, notificationMessage) {
+  var options = {
+    type: "basic",
+    title: title,
+    iconUrl: 'img/isitup16.png',
+    message: (notificationMessage)
+  }
+  chrome.notifications.create("", options, function (cb) {
+  });
+
+}
+
+/**
+ * Checks if given data is of type JSON
+ */
+function isDataJson(data) {
+  if (typeof data === 'object') {
+    return true;
+  }
+  var isJson = true;
+  try {
+    JSON.parse(data);
+  }
+  catch (err) {
+    isJson = false;
+  }
+  return isJson;
+}
+/**
+ * Stringify data with 4 spaces.
+ */
+function stringify(data) {
+  return JSON.stringify(data, null, 4);
+}
