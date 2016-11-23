@@ -6,7 +6,7 @@ $(document).ready(function () {
 
   // get configuraton values
   // get values from localsync
-  chrome.storage.local.get({
+  chrome.storage.sync.get({
     allowIndividualRetry: false,
     allowAutomaticRefresh: false,
     pushNotifications: false,
@@ -29,53 +29,36 @@ function doProcess(items) {
   }
   var componentMap = {};
   // create a componentMap 
-  var hcols = configuration.headers.cols.split(",");
-  var hrows = configuration.headers.rows.split(",");
-  // now validate json 
-  if (configuration.rows.length != hrows.length) {
-    setErrorText("Rows doesn't match list from Headers. Please check configuration");
+  for (i = 0; i < configuration.length; i++) {
+    componentMap[configuration[i].name] = configuration[i].envs;
   }
-  if (hrows.length == 0) {
-    setErrorText("Horizontal columns are empty. Please check configuration");
+  var environments = [];
+  var component = componentMap[configuration[0].name];
+  // create array of elements
+  for (var i = 0; i < component.length; i++) {
+    environments.push(component[i].name);
   }
-  for (var i = 0; i < configuration.rows.length; i++) {
-    if (configuration.rows[i].cols.length != hcols.length) {
-      setErrorText("Columns doesn't match header for row: " + i);
-      return;
-    }
-    componentMap[hrows[i]] = configuration.rows[i].cols;
-  }
-  // construct first row
+
   var isitupHtml = "<table id='envStatusTbl' class='table table-bordered table-striped table-hover table-condensed'>";
   isitupHtml += "<thead><tr class='info'><th></th>";
-  for (var i = 0; i < hcols.length; i++) {
-    isitupHtml += ("<th>" + hcols[i].toUpperCase() + "</th>");
+  for (var i = 0; i < environments.length; i++) {
+    isitupHtml += ("<th>" + environments[i].toUpperCase() + "</th>");
   }
   isitupHtml += "</tr></thead><tbody>";
-
-  var environments = [];
-
   var spanIdMap = {};
 
   $.each(componentMap, function (key, value) {
     isitupHtml += ("<tr><td><b>" + key + "</b></td>");
     for (var i = 0; i < value.length; i++) {
-      spanId = (key + "-" + hcols[i]);
-      if (value[i].healthUrl) {
+      spanId = (key + "-" + value[i].name);
+      if (value[i].url) {
         isitupHtml += ("<td><span id='" + spanId + "'>" + gifLoadingEle + "</span>");
         // if individual retry is allowed.
         if (items.allowIndividualRetry) {
-          isitupHtml += (" <span id='refreshId' data='" + spanId + "' class='status-code refresh glyphicon glyphicon-refresh' title='Refresh'></span>");
-        }
-        // setup secondary links as hrefs
-        if (value[i].other) {
-          for (var j = 0; j < value[i].other.length; j++) {
-            isitupHtml += " <a target='_blank' href='" + value[i].other[j].url + "'>" 
-            isitupHtml += "<img src='" + value[i].other[j].icon + "' title='"+value[i].other[j].url+"'/></a> ";
-          }
+          isitupHtml += (" <span id='refreshId' data='" + spanId + "' class='status-code refresh glyphicon glyphicon-refresh'></span>");
         }
         isitupHtml += "</td>";
-        spanIdMap[spanId] = value[i].healthUrl;
+        spanIdMap[spanId] = value[i].url;
       } else {
         isitupHtml += ("<td><span class='status-code na'>" + notApplicable + "</span></td>");
       }
@@ -152,7 +135,7 @@ function checkHealth(spanIdMap, pushNotifications) {
         if (jqXHR.status) {
           var statusData = {};
           statusData.error = errorThrown;
-          errMsg += "with error '" + errorThrown + "' \n";
+          errMsg += "with error '"+errorThrown+"' \n";
           statusData.url = value;
           $('#' + key).addClass("status-code error");
           $('#' + key).attr('data', stringify(statusData));
@@ -167,12 +150,11 @@ function checkHealth(spanIdMap, pushNotifications) {
         }
         errMsg += "URL is " + value;
         if (pushNotifications) {
-          sendNotification((key + " is down!!!"), errMsg);
+          sendNotification((key +" is down!!!"), errMsg);
         }
       },
       complete: function () {
         $('#' + key).removeClass("loading");
-        $('#' + key).attr('title', value);
       }
     });
   });
@@ -215,8 +197,4 @@ function isDataJson(data) {
  */
 function stringify(data) {
   return JSON.stringify(data, null, 4);
-}
-
-function setErrorText(text) {
-  $('#isitupId').html(text);
 }

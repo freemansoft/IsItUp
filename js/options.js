@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 
     // get values from localsync
-    chrome.storage.sync.get({
+    chrome.storage.local.get({
         allowIndividualRetry: false,
         allowAutomaticRefresh: false,
         pushNotifications: false,
@@ -86,7 +86,7 @@ $(document).ready(function () {
         var cfgTxt = $("textarea[name=cfgTxt]").val();
   
        
-        chrome.storage.sync.set({
+        chrome.storage.local.set({
             allowIndividualRetry: allowIndividualRetry,
             allowAutomaticRefresh: allowAutomaticRefresh,
             pushNotifications: pushNotifications,

@@ -1,134 +1,378 @@
- [
+{
+  "headers": {
+    "cols": "dev,int,test,qa,uat,ct,prod",
+    "rows": "Gmail,AdWords,Youtube,Alphabet"
+  },
+  "rows": [
     {
-      "name": "Gmail",
-      "envs": [
+      "cols": [
         {
-          "name": "dev",
-          "url": "http://google.com"
+          "healthUrl": "http://google.com",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=gmail.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=feedly.com"
+            }
+          ]
         },
         {
-          "name": "int",
-          "url": "http://google.com"
+          "healthUrl": "http://google.com",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=jsonviewer.stack.hu"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=adblockplus.org"
+            }
+          ]
         },
         {
-          "name": "test",
-          "url": "http://panen.nl/asd"
+          "healthUrl": "http://panen.nl/asd",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=npr.org"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=who.org"
+            }
+          ]
         },
         {
-          "name": "qa",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=wikipedia.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=github.com"
+            }
+          ]
         },
         {
-          "name": "uat",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=gmail.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=feedly.com"
+            }
+          ]
         },
         {
-          "name": "ct",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=gmail.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=feedly.com"
+            }
+          ]
         },
         {
-          "name": "prod",
-          "url": ""
+          "healthUrl": ""
         }
       ]
     },
     {
-      "name": "AdWords",
-      "envs": [
+      "cols": [
         {
-          "name": "dev",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=gmail.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=feedly.com"
+            }
+          ]
         },
         {
-          "name": "int",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=gmail.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=feedly.com"
+            }
+          ]
         },
         {
-          "name": "test",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=gmail.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=feedly.com"
+            }
+          ]
         },
         {
-          "name": "qa",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=gmail.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=feedly.com"
+            }
+          ]
         },
         {
-          "name": "uat",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=wrangler.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=lee.com"
+            }
+          ]
         },
         {
-          "name": "ct",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=tommyhilfigher.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=bluemoon.com"
+            }
+          ]
         },
         {
-          "name": "prod",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=budweiser.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=variety.com"
+            }
+          ]
         }
       ]
     },
     {
-      "name": "Youtube",
-      "envs": [
+      "cols": [
         {
-          "name": "dev",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=greatandhra.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=videomasti.net"
+            }
+          ]
         },
         {
-          "name": "int",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=mlb.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=nba.com"
+            }
+          ]
         },
         {
-          "name": "test",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=nfl.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=whatsapp.web"
+            }
+          ]
         },
         {
-          "name": "qa",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=google.co.in"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=yahoo.co.in"
+            }
+          ]
         },
         {
-          "name": "uat",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=mac.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=swatch.com"
+            }
+          ]
         },
         {
-          "name": "ct",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=gmail.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=nestle.com"
+            }
+          ]
         },
         {
-          "name": "prod",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=gvk.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=gs.com"
+            }
+          ]
         }
       ]
     },
     {
-      "name": "Alphabet",
-      "envs": [
+      "cols": [
         {
-          "name": "dev",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=spacerack.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=teamviewer.com"
+            }
+          ]
         },
         {
-          "name": "int",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=appdynamics.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=splunk.com"
+            }
+          ]
         },
         {
-          "name": "test",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=burgerking.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=regal.com"
+            }
+          ]
         },
         {
-          "name": "qa",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=toshiba.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=samsung.com"
+            }
+          ]
         },
         {
-          "name": "uat",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=apple.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=twitter.com"
+            }
+          ]
         },
         {
-          "name": "ct",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=instagram.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=yahoo.com"
+            }
+          ]
         },
         {
-          "name": "prod",
-          "url": "http://headers.jsontest.com/"
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=linkedin.com"
+            },
+            {
+              "url": "http://google.com",
+              "icon": "https://www.google.com/s2/favicons?domain=facebook.com"
+            }
+          ]
         }
       ]
     }
   ]
+}
