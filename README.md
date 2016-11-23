@@ -1,2 +1,5 @@
-# HEAR (How Many Environments are Running)
-For Given URL's checks the status and display it as
+# Is It Up
+
+Inline-style: 
+![alt text](/img/version1.2.png "Screenshot")
+

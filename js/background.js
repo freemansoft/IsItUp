@@ -1,3 +1,3 @@
 chrome.browserAction.onClicked.addListener(function(tab) {
-    chrome.tabs.create({ url: "./hear.html" });
+    chrome.tabs.create({ url: "./isitup.html" });
 });
