@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     var filePath;
 
-    $("input:file").change(function () {
+   /* $("input:file").change(function () {
         filePath = $(this).val();
         filePath = filePath.replace("C:\\fakepath\\", "");
         if(filePath){
@@ -22,7 +22,7 @@ $(document).ready(function () {
                 
             });
         }  
-    });
+    });*/
 
 
     // get values from localsync
