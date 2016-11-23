@@ -13,7 +13,7 @@
 
 ### Screenshot showing options page and all possible configurations
 
-![Alt text](https://github.com/NaveenGurram/IsItUp/blob/master/Screenshots/Options.png "Options Page")
+![Alt text](https://github.com/NaveenGurram/IsItUp/blob/master/screenshots/Options.png "Options Page")
 
 ### Screenshot visual representation of JSON file.
 [Download Sample Configuration File](./conf/defaultConf.json)
