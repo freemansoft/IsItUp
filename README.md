@@ -9,14 +9,14 @@
 
 ### Extension showing status of different components in multiple environments
 
-![Alt text](./Screenshots/Extension.png?raw=true "Extension")
+![Alt text](https://github.com/NaveenGurram/IsItUp/blob/master/screenshots/Extension.png "Extension")
 
 ### Screenshot showing options page and all possible configurations
 
-![Alt text](./Screenshots/Options.png?raw=true "Options Page")
+![Alt text](https://github.com/NaveenGurram/IsItUp/blob/master/Screenshots/Options.png "Options Page")
 
 ### Screenshot visual representation of JSON file.
 [Download Sample Configuration File](./conf/defaultConf.json)
 
-![Alt text](./Screenshots/ConfigurationJson.png?raw=true "Configuration Json Visual Representation")
+![Alt text](https://github.com/NaveenGurram/IsItUp/blob/master/screenshots/ConfigurationJson.png?raw=true "Configuration Json Visual Representation")
 
