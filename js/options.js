@@ -2,33 +2,6 @@ $(document).ready(function () {
 
     document.getElementById('confFileUpld').addEventListener('change', readSingleFile, false);
 
-    var filePath;
-
-    /*$("input:file").change(function () {
-         filePath = $(this).val();
-         
-         filePath = filePath.replace("C:\\fakepath\\", "");
-         if(filePath){
-             jQuery.get(filePath, function (data) {
-                 var IS_JSON = true;
-                 try {
-                     var json = $.parseJSON(data);
-                 }
-                 catch (err) {
-                     IS_JSON = false;
-                 }
-                 if(IS_JSON){
-                     $("textarea[name='cfgTxt']").val(data);
-                 }else{
-                     alert("Invalid configuration Json file!!");
-                 }
-                 
-             });
-         }  
-     }); */
-
-
-
     // get values from localsync
     chrome.storage.local.get({
         allowIndividualRetry: false,
@@ -88,6 +61,9 @@ $(document).ready(function () {
         var pushNotifications = ($("input[name=pushNotifications]:checked").val() === 'Yes');
         var pageRefreshAfter = $("input[name=pageRefreshAfter]").val();
         var cfgTxt = $("textarea[name=cfgTxt]").val();
+        if(!allowAutomaticRefresh){
+            pageRefreshAfter = 0;
+        }
 
 
         chrome.storage.local.set({

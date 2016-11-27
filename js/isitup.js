@@ -89,7 +89,7 @@ function doProcess(items) {
   // now check health
   checkHealth(spanIdMap, items.pushNotifications);
   // allow automatic refresh
-  if (items.allowAutomaticRefresh) {
+  if (items.allowAutomaticRefresh && items.pageRefreshAfter > 0) {
     // refresh status every x seconds
     window.setInterval(function () {
       /// call your function here
