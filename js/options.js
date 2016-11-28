@@ -7,7 +7,7 @@ $(document).ready(function () {
         allowIndividualRetry: false,
         allowAutomaticRefresh: false,
         pushNotifications: false,
-        pageRefreshAfter: 30,
+        pageRefreshAfter: 0,
         cfgTxt: ""
     }, function (items) {
         if (items.cfgTxt) {
@@ -22,6 +22,8 @@ $(document).ready(function () {
 
         if (items.allowIndividualRetry) {
             $('#pageRefreshAfterId').show();
+        }else{
+            items.pageRefreshAfter=0;
         }
         $('#pageRefreshAfter').val(items.pageRefreshAfter);
 
@@ -51,6 +53,7 @@ $(document).ready(function () {
         if ($(this).val() == 'Yes') {
             $('#pageRefreshAfterId').show();
         } else {
+            $('#pageRefreshAfterId').val(0);
             $('#pageRefreshAfterId').hide();
         }
     });
