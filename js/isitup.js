@@ -60,7 +60,7 @@ function doProcess(items) {
   $.each(componentMap, function (key, value) {
     isitupHtml += ("<tr><td><b>" + key + "</b></td>");
     for (var i = 0; i < value.length; i++) {
-      spanId = (key + "-" + hcols[i]);
+      spanId = uuid();
       if (value[i].healthUrl) {
         isitupHtml += ("<td><span id='" + spanId + "'>" + gifLoadingEle + "</span>");
         // if individual retry is allowed.
@@ -171,7 +171,6 @@ function checkHealth(spanIdMap, pushNotifications) {
         }
       },
       complete: function () {
-        $('#' + key).removeClass("loading");
         $('#' + key).attr('title', value);
       }
     });
@@ -220,3 +219,11 @@ function stringify(data) {
 function setErrorText(text) {
   $('#isitupId').html(text);
 }
+/**
+ * generates uuid
+ */
+function uuid() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
