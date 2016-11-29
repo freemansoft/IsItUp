@@ -143,6 +143,7 @@ function checkHealth(spanIdMap, pushNotifications) {
           jsonObj.url = value;
           spanData = stringify(jsonObj);
         }
+        $('#' + key).removeClass("status-code error");
         $('#' + key).addClass("status-code success");
         $('#' + key).attr('data', spanData);
         $('#' + key).text("200");
