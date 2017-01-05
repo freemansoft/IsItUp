@@ -60,7 +60,7 @@ function doProcess(items) {
   $.each(componentMap, function (key, value) {
     isitupHtml += ("<tr><td><b>" + key + "</b></td>");
     for (var i = 0; i < value.length; i++) {
-      spanId = (key + "-" + hcols[i]);
+      spanId = uuid();
       if (value[i].healthUrl) {
         isitupHtml += ("<td><span id='" + spanId + "'>" + gifLoadingEle + "</span>");
         // if individual retry is allowed.
@@ -89,7 +89,7 @@ function doProcess(items) {
   // now check health
   checkHealth(spanIdMap, items.pushNotifications);
   // allow automatic refresh
-  if (items.allowAutomaticRefresh) {
+  if (items.allowAutomaticRefresh && items.pageRefreshAfter > 0) {
     // refresh status every x seconds
     window.setInterval(function () {
       /// call your function here
@@ -143,6 +143,7 @@ function checkHealth(spanIdMap, pushNotifications) {
           jsonObj.url = value;
           spanData = stringify(jsonObj);
         }
+        $('#' + key).removeClass("status-code error");
         $('#' + key).addClass("status-code success");
         $('#' + key).attr('data', spanData);
         $('#' + key).text("200");
@@ -171,7 +172,6 @@ function checkHealth(spanIdMap, pushNotifications) {
         }
       },
       complete: function () {
-        $('#' + key).removeClass("loading");
         $('#' + key).attr('title', value);
       }
     });
@@ -220,3 +220,11 @@ function stringify(data) {
 function setErrorText(text) {
   $('#isitupId').html(text);
 }
+/**
+ * generates uuid
+ */
+function uuid() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
