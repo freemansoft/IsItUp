@@ -32,33 +32,43 @@ function doProcess(items) {
   var hcols = configuration.headers.cols.split(",");
   var hrows = configuration.headers.rows.split(",");
   // now validate json 
-  if (configuration.rows.length != hrows.length) {
-    setErrorText("Rows doesn't match list from Headers. Please check configuration");
+  if (hcols.length == 0) {
+    setErrorText("Configuration Error: No column headers specified. Please check configuration");
+    return;
   }
   if (hrows.length == 0) {
-    setErrorText("Horizontal columns are empty. Please check configuration");
+    setErrorText("Configuration Error: No row headers specified. Please check configuration");
+    return;
   }
+  // verify the number of row headers matches number of rows
+  if (configuration.rows.length != hrows.length) {
+    setErrorText("Configuration Error: "+configuration.rows.length+" rows of data provided. This conflicts with the "+hrows.length+" row headers provided.");
+    return;
+  }
+  // verify the number of cols in each row matches the number of col headers
   for (var i = 0; i < configuration.rows.length; i++) {
     if (configuration.rows[i].cols.length != hcols.length) {
-      setErrorText("Columns doesn't match header for row: " + i);
+      setErrorText("Configuration Error: Row "+i+" has "+configuration.rows[i].cols.length+" columns of data provided. This conflicts with the "+hcols.length+" column headers provided");
       return;
     }
     componentMap[hrows[i]] = configuration.rows[i].cols;
   }
-  // construct first row
+  // construct column header row
   var isitupHtml = "<table id='envStatusTbl' class='table table-bordered table-striped table-hover table-condensed'>";
   isitupHtml += "<thead><tr class='info'><th></th>";
   for (var i = 0; i < hcols.length; i++) {
     isitupHtml += ("<th>" + hcols[i].toUpperCase() + "</th>");
   }
   isitupHtml += "</tr></thead><tbody>";
-
+  // we call the columns "environments"
   var environments = [];
 
   var spanIdMap = {};
 
   $.each(componentMap, function (key, value) {
+    // row header
     isitupHtml += ("<tr><td><b>" + key + "</b></td>");
+    // now each row
     for (var i = 0; i < value.length; i++) {
       spanId = uuid();
       if (value[i].healthUrl) {
@@ -67,7 +77,7 @@ function doProcess(items) {
         if (items.allowIndividualRetry) {
           isitupHtml += (" <span id='refreshId' data='" + spanId + "' class='status-code refresh glyphicon glyphicon-refresh' title='Refresh'></span>");
         }
-        // setup secondary links as hrefs
+        // setup secondary links as hrefs - they go inside the same cell as primary
         if (value[i].other) {
           for (var j = 0; j < value[i].other.length; j++) {
             isitupHtml += " <a target='_blank' href='" + value[i].other[j].url + "'>" 
@@ -129,10 +139,13 @@ function doProcess(items) {
  */
 function checkHealth(spanIdMap, pushNotifications) {
   // now fire all url's and callback will update span with corresponding style and the content.
+  // Deprecation Notice: The jqXHR.success(), jqXHR.error(), and jqXHR.complete() callbacks are removed as of jQuery 3.0. You can use jqXHR.done(), jqXHR.fail(), and jqXHR.always() instead.
+  // http://api.jquery.com/jquery.ajax/
   $.each(spanIdMap, function (key, value) {
     $.ajax({
       url: value,
       type: 'GET',
+      // 2xx and notmodified 304
       success: function (data) {
         var spanData = "";
         if (isDataJson(data)) {

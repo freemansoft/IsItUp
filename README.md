@@ -1,26 +1,60 @@
 # Is It Up
-## Checks 
 
-### Features
+This Chrome plugin displays the status of a set of web applications organized in a grid pattern.
+It is intended to act as a dashboard for web applications that are deployed across various enviornments.
+Environments could be SDLC lifecycle environments, Development, Production, etc or,
+they could be various data centers or enpoints when applications are deployed in multiple locations.
 
-* Ability to configure it using JSON from options page
-* Ability to refresh continously with a interval that can be configured
-* Ability to push Chrome notifications when environment is down.
+The extension has no intrinsic understanding of the meaning of rows and columns. 
+Row and column usage described above is a convention that works when monitoring many andpoints across < 10 environments.
+The configuration and meaning of rows and columns is flexible and is up to the user.
 
-### Installation Steps
+## Cell Contents
+Each cell contains 
+
+* An icon the that represents the return of the last call to that service.
+* A refresh icon that will re run the query to this endpoint.
+* Any number of supporting links.  These are often links to documentation other dashboards or other environmental tools.
+
+This image shows a primary link with a 200 return code, the refrish link and helper links to Splunk and AppDynamics
+
+![Extension](https://github.com/NaveenGurram/IsItUp/blob/master/screenshots/IndividualCell.jpg?raw=true "Extension")
+
+## Features
+
+* Configure using JSON from options page.
+* Configure using a file via the options page.
+* Refresh health status continously with a interval that can be configured
+* Push Chrome notifications when a cell returns a non-200.
+
+## Installation Steps
+Load like any other chrome extension
 * This can be installed from Chrome Store @
 * This can be installed in chrome as developer extension.
 
-### Extension showing status of different components in multiple environments
+## Image Hints
+You will want small images, preferrably smaller than the result code icons.  
+Google has a tool that can turn a website favicon into a standard image.
+This (slightly hacked up) url shows how it can be done. Replace foo.com with your URL.
+* https://www.google.com/s2/favicons?domain=foo.com
 
-![Extension](https://github.com/NaveenGurram/IsItUp/blob/master/screenshots/Extension.png "Extension")
+___
 
-### Screenshot showing options page and all possible configurations
+## Sample Images
 
-![Options](https://github.com/NaveenGurram/IsItUp/blob/master/screenshots/Options.png "Options Page")
+### Status of different components in multiple environments
+Each row here represents a different application. Each column represents a different SDLC environment.
+Each cell contains the primary endpoint, a refresh button and link to 2 supporting applications for that endpoint.
+![Extension](https://github.com/NaveenGurram/IsItUp/blob/master/screenshots/Extension.png?raw=true "Extension")
 
-### Screenshot visual representation of JSON file.
+### Options page and all possible configurations
+![Options](https://github.com/NaveenGurram/IsItUp/blob/master/screenshots/Options.png?raw=true "Options Page")
+
+### Visual representation of JSON file.
 [Download Sample Configuration File](./conf/defaultConf.json)
 
 ![Configuration](https://github.com/NaveenGurram/IsItUp/blob/master/screenshots/ConfigurationJson.png?raw=true "Configuration Json Visual Representation")
 
+___
+## Future Features
+1. Configuration via network URL.
