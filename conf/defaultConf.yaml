@@ -1,27 +1,29 @@
 ---
 headers:
-  cols: dev,int,test,qa,uat,ct,prod
-  rows: Gmail,AdWords,Youtube,Alphabet
+  cols: dev/ci,integration,func test,qa,user test,production
+  rows: Web App 1,Service 1,Service 2,Service 3
 rows:
 - cols:
   - healthUrl: http://google.com
     other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=gmail.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=feedly.com
-  - healthUrl: http://google.com
+    - url: https://jenkins.io/
+      icon: https://www.google.com/s2/favicons?domain=jenkins.io
+    - url: https://www.sonarsource.com/
+      icon: https://www.google.com/s2/favicons?domain=sonarsource.com
+    - url: https://github.com/NaveenGurram/IsItUp/
+      icon: https://www.google.com/s2/favicons?domain=github.com
+  - healthUrl: http://headers.jsontest.com/
     other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=jsonviewer.stack.hu
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=adblockplus.org
+    - url: https://www.appdynamics.com/
+      icon: https://www.google.com/s2/favicons?domain=appdynamics.com
+    - url: https://www.splunk.com/
+      icon: https://www.google.com/s2/favicons?domain=splunk.com
   - healthUrl: http://panen.nl/asd
     other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=npr.org
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=who.org
+    - url: http://specflow.org/
+      icon: https://www.google.com/s2/favicons?domain=specflow.org
+    - url: https://cucumber.io/
+      icon: https://www.google.com/s2/favicons?domain=cucumber.io
   - healthUrl: http://headers.jsontest.com/
     other:
     - url: http://google.com
@@ -34,32 +36,28 @@ rows:
       icon: https://www.google.com/s2/favicons?domain=gmail.com
     - url: http://google.com
       icon: https://www.google.com/s2/favicons?domain=feedly.com
-  - healthUrl: http://headers.jsontest.com/
-    other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=gmail.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=feedly.com
   - healthUrl: ''
 - cols:
   - healthUrl: http://headers.jsontest.com/
     other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=gmail.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=feedly.com
+    - url: https://jenkins.io/
+      icon: https://www.google.com/s2/favicons?domain=jenkins.io
+    - url: https://www.sonarsource.com/
+      icon: https://www.google.com/s2/favicons?domain=sonarsource.com
+    - url: https://github.com/NaveenGurram/IsItUp/
+      icon: https://www.google.com/s2/favicons?domain=github.com
   - healthUrl: http://headers.jsontest.com/
     other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=gmail.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=feedly.com
+    - url: https://www.appdynamics.com/
+      icon: https://www.google.com/s2/favicons?domain=appdynamics.com
+    - url: https://www.splunk.com/
+      icon: https://www.google.com/s2/favicons?domain=splunk.com
   - healthUrl: http://headers.jsontest.com/
     other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=gmail.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=feedly.com
+    - url: http://specflow.org/
+      icon: https://www.google.com/s2/favicons?domain=specflow.org
+    - url: https://cucumber.io/
+      icon: https://www.google.com/s2/favicons?domain=cucumber.io
   - healthUrl: http://headers.jsontest.com/
     other:
     - url: http://google.com
@@ -75,34 +73,30 @@ rows:
   - healthUrl: http://headers.jsontest.com/
     other:
     - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=tommyhilfigher.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=bluemoon.com
-  - healthUrl: http://headers.jsontest.com/
-    other:
-    - url: http://google.com
       icon: https://www.google.com/s2/favicons?domain=budweiser.com
     - url: http://google.com
       icon: https://www.google.com/s2/favicons?domain=variety.com
 - cols:
   - healthUrl: http://headers.jsontest.com/
     other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=greatandhra.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=videomasti.net
+    - url: https://jenkins.io/
+      icon: https://www.google.com/s2/favicons?domain=jenkins.io
+    - url: https://www.sonarsource.com/
+      icon: https://www.google.com/s2/favicons?domain=sonarsource.com
+    - url: https://github.com/NaveenGurram/IsItUp/
+      icon: https://www.google.com/s2/favicons?domain=github.com
   - healthUrl: http://headers.jsontest.com/
     other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=mlb.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=nba.com
+    - url: https://www.appdynamics.com/
+      icon: https://www.google.com/s2/favicons?domain=appdynamics.com
+    - url: https://www.splunk.com/
+      icon: https://www.google.com/s2/favicons?domain=splunk.com
   - healthUrl: http://headers.jsontest.com/
     other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=nfl.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=whatsapp.web
+    - url: http://specflow.org/
+      icon: https://www.google.com/s2/favicons?domain=specflow.org
+    - url: https://cucumber.io/
+      icon: https://www.google.com/s2/favicons?domain=cucumber.io
   - healthUrl: http://headers.jsontest.com/
     other:
     - url: http://google.com
@@ -118,34 +112,30 @@ rows:
   - healthUrl: http://headers.jsontest.com/
     other:
     - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=gmail.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=nestle.com
-  - healthUrl: http://headers.jsontest.com/
-    other:
-    - url: http://google.com
       icon: https://www.google.com/s2/favicons?domain=gvk.com
     - url: http://google.com
       icon: https://www.google.com/s2/favicons?domain=gs.com
 - cols:
   - healthUrl: http://headers.jsontest.com/
     other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=spacerack.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=teamviewer.com
+    - url: https://jenkins.io/
+      icon: https://www.google.com/s2/favicons?domain=jenkins.io
+    - url: https://www.sonarsource.com/
+      icon: https://www.google.com/s2/favicons?domain=sonarsource.com
+    - url: https://github.com/NaveenGurram/IsItUp/
+      icon: https://www.google.com/s2/favicons?domain=github.com
   - healthUrl: http://headers.jsontest.com/
     other:
-    - url: http://google.com
+    - url: https://www.appdynamics.com/
       icon: https://www.google.com/s2/favicons?domain=appdynamics.com
-    - url: http://google.com
+    - url: https://www.splunk.com/
       icon: https://www.google.com/s2/favicons?domain=splunk.com
   - healthUrl: http://headers.jsontest.com/
     other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=burgerking.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=regal.com
+    - url: http://specflow.org/
+      icon: https://www.google.com/s2/favicons?domain=specflow.org
+    - url: https://cucumber.io/
+      icon: https://www.google.com/s2/favicons?domain=cucumber.io
   - healthUrl: http://headers.jsontest.com/
     other:
     - url: http://google.com
@@ -158,12 +148,6 @@ rows:
       icon: https://www.google.com/s2/favicons?domain=apple.com
     - url: http://google.com
       icon: https://www.google.com/s2/favicons?domain=twitter.com
-  - healthUrl: http://headers.jsontest.com/
-    other:
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=instagram.com
-    - url: http://google.com
-      icon: https://www.google.com/s2/favicons?domain=yahoo.com
   - healthUrl: http://headers.jsontest.com/
     other:
     - url: http://google.com

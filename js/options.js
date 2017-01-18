@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     // get values from localsync
     chrome.storage.local.get({
-        allowIndividualRetry: false,
+        allowIndividualRetry: true,
         allowAutomaticRefresh: false,
         pushNotifications: false,
         pageRefreshAfter: 0,
