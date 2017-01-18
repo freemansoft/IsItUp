@@ -6,6 +6,8 @@ rows:
 - cols:
   - healthUrl: http://google.com
     other:
+    - url: https://swagger.io/
+      icon: https://www.google.com/s2/favicons?domain=swagger.io
     - url: https://jenkins.io/
       icon: https://www.google.com/s2/favicons?domain=jenkins.io
     - url: https://www.sonarsource.com/
@@ -40,6 +42,8 @@ rows:
 - cols:
   - healthUrl: http://headers.jsontest.com/
     other:
+    - url: https://swagger.io/
+      icon: https://www.google.com/s2/favicons?domain=swagger.io
     - url: https://jenkins.io/
       icon: https://www.google.com/s2/favicons?domain=jenkins.io
     - url: https://www.sonarsource.com/
@@ -79,6 +83,8 @@ rows:
 - cols:
   - healthUrl: http://headers.jsontest.com/
     other:
+    - url: https://swagger.io/
+      icon: https://www.google.com/s2/favicons?domain=swagger.io
     - url: https://jenkins.io/
       icon: https://www.google.com/s2/favicons?domain=jenkins.io
     - url: https://www.sonarsource.com/
@@ -118,6 +124,8 @@ rows:
 - cols:
   - healthUrl: http://headers.jsontest.com/
     other:
+    - url: https://swagger.io/
+      icon: https://www.google.com/s2/favicons?domain=swagger.io
     - url: https://jenkins.io/
       icon: https://www.google.com/s2/favicons?domain=jenkins.io
     - url: https://www.sonarsource.com/
