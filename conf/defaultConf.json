@@ -23,6 +23,10 @@
               "icon": "https://www.google.com/s2/favicons?domain=sonarsource.com"
             },
             {
+              "url": "https://www.atlassian.com/software/confluence",
+              "icon": "https://www.google.com/s2/favicons?domain=atlassian.com"
+            },
+            {
               "url": "https://github.com/NaveenGurram/IsItUp",
               "icon": "https://www.google.com/s2/favicons?domain=github.com"
             }
@@ -32,12 +36,12 @@
           "healthUrl": "http://headers.jsontest.com/",
           "other": [
             {
-              "url": "https://www.appdynamics.com/",
-              "icon": "https://www.google.com/s2/favicons?domain=appdynamics.com"
+              "url": "https://www.elastic.co/",
+              "icon": "https://www.google.com/s2/favicons?domain=elastic.co"
             },
             {
-              "url": "https://www.splunk.com/",
-              "icon": "https://www.google.com/s2/favicons?domain=splunk.com"
+              "url": "https://www.dynatrace.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=dynatrace.com"
             }
           ]
         },
@@ -45,12 +49,16 @@
           "healthUrl": "http://panen.nl/asd",
           "other": [
             {
-              "url": "http://specflow.org/",
-              "icon": "https://www.google.com/s2/favicons?domain=specflow.org"
+              "url": "https://www.elastic.co/",
+              "icon": "https://www.google.com/s2/favicons?domain=elastic.co"
             },
             {
-              "url": "https://cucumber.io/",
-              "icon": "https://www.google.com/s2/favicons?domain=https://cucumber.io/"
+              "url": "https://www.dynatrace.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=dynatrace.com"
+            },
+            {
+              "url": "http://specflow.org/",
+              "icon": "https://www.google.com/s2/favicons?domain=specflow.org"
             }
           ]
         },
@@ -58,12 +66,12 @@
           "healthUrl": "http://headers.jsontest.com/",
           "other": [
             {
-              "url": "http://google.com",
-              "icon": "https://www.google.com/s2/favicons?domain=wikipedia.com"
+              "url": "https://www.elastic.co/",
+              "icon": "https://www.google.com/s2/favicons?domain=elastic.co"
             },
             {
-              "url": "http://google.com",
-              "icon": "https://www.google.com/s2/favicons?domain=github.com"
+              "url": "https://www.dynatrace.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=dynatrace.com"
             }
           ]
         },
@@ -93,6 +101,10 @@
               "icon": "https://www.google.com/s2/favicons?domain=sonarsource.com"
             },
             {
+              "url": "https://www.atlassian.com/software/confluence",
+              "icon": "https://www.google.com/s2/favicons?domain=atlassian.com"
+            },
+            {
               "url": "https://github.com/NaveenGurram/IsItUp",
               "icon": "https://www.google.com/s2/favicons?domain=github.com"
             }
@@ -115,8 +127,12 @@
           "healthUrl": "http://headers.jsontest.com/",
           "other": [
             {
-              "url": "http://specflow.org/",
-              "icon": "https://www.google.com/s2/favicons?domain=specflow.org"
+              "url": "https://www.appdynamics.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=appdynamics.com"
+            },
+            {
+              "url": "https://www.splunk.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=splunk.com"
             },
             {
               "url": "https://cucumber.io/",
@@ -128,12 +144,12 @@
           "healthUrl": "http://headers.jsontest.com/",
           "other": [
             {
-              "url": "http://google.com",
-              "icon": "https://www.google.com/s2/favicons?domain=gmail.com"
+              "url": "https://www.appdynamics.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=appdynamics.com"
             },
             {
-              "url": "http://google.com",
-              "icon": "https://www.google.com/s2/favicons?domain=feedly.com"
+              "url": "https://www.splunk.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=splunk.com"
             }
           ]
         },
@@ -183,6 +199,10 @@
               "icon": "https://www.google.com/s2/favicons?domain=sonarsource.com"
             },
             {
+              "url": "https://www.atlassian.com/software/confluence",
+              "icon": "https://www.google.com/s2/favicons?domain=atlassian.com"
+            },
+            {
               "url": "https://github.com/NaveenGurram/IsItUp",
               "icon": "https://www.google.com/s2/favicons?domain=github.com"
             }
@@ -205,8 +225,12 @@
           "healthUrl": "http://headers.jsontest.com/",
           "other": [
             {
-              "url": "http://specflow.org/",
-              "icon": "https://www.google.com/s2/favicons?domain=specflow.org"
+              "url": "https://www.appdynamics.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=appdynamics.com"
+            },
+            {
+              "url": "https://www.splunk.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=splunk.com"
             },
             {
               "url": "https://cucumber.io/",
@@ -218,12 +242,12 @@
           "healthUrl": "http://headers.jsontest.com/",
           "other": [
             {
-              "url": "http://google.com",
-              "icon": "https://www.google.com/s2/favicons?domain=google.co.in"
+              "url": "https://www.appdynamics.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=appdynamics.com"
             },
             {
-              "url": "http://google.com",
-              "icon": "https://www.google.com/s2/favicons?domain=yahoo.co.in"
+              "url": "https://www.splunk.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=splunk.com"
             }
           ]
         },
@@ -273,6 +297,10 @@
               "icon": "https://www.google.com/s2/favicons?domain=sonarsource.com"
             },
             {
+              "url": "https://www.atlassian.com/software/confluence",
+              "icon": "https://www.google.com/s2/favicons?domain=atlassian.com"
+            },
+            {
               "url": "https://github.com/NaveenGurram/IsItUp",
               "icon": "https://www.google.com/s2/favicons?domain=github.com"
             }
@@ -295,8 +323,12 @@
           "healthUrl": "http://headers.jsontest.com/",
           "other": [
             {
-              "url": "http://specflow.org/",
-              "icon": "https://www.google.com/s2/favicons?domain=specflow.org"
+              "url": "https://www.appdynamics.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=appdynamics.com"
+            },
+            {
+              "url": "https://www.splunk.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=splunk.com"
             },
             {
               "url": "https://cucumber.io/",
@@ -308,12 +340,12 @@
           "healthUrl": "http://headers.jsontest.com/",
           "other": [
             {
-              "url": "http://google.com",
-              "icon": "https://www.google.com/s2/favicons?domain=toshiba.com"
+              "url": "https://www.appdynamics.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=appdynamics.com"
             },
             {
-              "url": "http://google.com",
-              "icon": "https://www.google.com/s2/favicons?domain=samsung.com"
+              "url": "https://www.splunk.com/",
+              "icon": "https://www.google.com/s2/favicons?domain=splunk.com"
             }
           ]
         },
