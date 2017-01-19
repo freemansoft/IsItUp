@@ -2,7 +2,7 @@
   "title": "Demonstration Status",
   "headers": {
     "cols": "dev/ci,integration,func test,qa,prod azure,prod aws",
-    "rows": "Web App 1,Web App 2,Service 1,Service 2"
+    "rows": "Web App 1,Web App 2,Service 1,Service 2,External Service"
   },
   "rows": [
     {
@@ -376,6 +376,33 @@
           ]
         }
       ]
+    },
+        {
+      "cols": [
+        {
+          "healthUrl": ""
+        },
+        {
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+          ]
+        },
+        {
+          "healthUrl": ""
+        },
+        {
+          "healthUrl": ""
+        },
+        {
+          "healthUrl": ""
+        },
+        {
+          "healthUrl": "http://headers.jsontest.com/",
+          "other": [
+          ]
+        }
+      ]
     }
+
   ]
 }
