@@ -62,7 +62,7 @@ function doProcess(items) {
   var isitupHtml = "<table id='envStatusTbl' class='table table-bordered table-striped table-hover table-condensed'>";
   isitupHtml += layoutHeader(hcols);
   isitupHtml += layoutTableBody(componentMap, spanIdMap, items.allowIndividualRetry);
-  isitupHtml += layoutHeader(hcols);
+  /// isitupHtml += layoutHeader(hcols);
   isitupHtml += "</table>";
   // now inject markup into web page table 
   $('#isitupId').html(isitupHtml);
