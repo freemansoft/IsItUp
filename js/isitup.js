@@ -57,15 +57,14 @@ function doProcess(items) {
     componentMap[hrows[i]] = configuration.rows[i].cols;
   }
   layoutTitle(configuration.title);
+  var spanIdMap = {}
   // create table
   var isitupHtml = "<table id='envStatusTbl' class='table table-bordered table-striped table-hover table-condensed'>";
-  // construct column header row
   isitupHtml += layoutHeader(hcols);
-  // generate the main table HTML markup
-  var spanIdMap = {}
   isitupHtml += layoutTableBody(componentMap, spanIdMap, items.allowIndividualRetry);
+  isitupHtml += layoutHeader(hcols);
   isitupHtml += "</table>";
-  // now update web page table 
+  // now inject markup into web page table 
   $('#isitupId').html(isitupHtml);
   // now check health
   checkHealth(spanIdMap, items.pushNotifications);
