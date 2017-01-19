@@ -9,7 +9,12 @@ The extension has no intrinsic understanding of the meaning of rows and columns.
 Row and column usage described above is a convention that works when monitoring many andpoints across < 10 environments.
 The configuration and meaning of rows and columns is flexible and is up to the user.
 
-## Cell Contents
+## Display Elements
+
+### Customizable Screen Title
+See sample json
+
+### Cell Contents
 Each cell contains 
 
 * An icon the that represents the return of the last call to that service.
@@ -20,9 +25,10 @@ This image shows a primary link with a 200 return code, the refrish link and hel
 
 ![Extension](https://github.com/NaveenGurram/IsItUp/blob/master/screenshots/IndividualCell.jpg?raw=true "Extension")
 
+
 ## Features
 
-* Configure using JSON from options page.
+* Enter or paste JSON on the options page.
 * Configure using a file via the options page.
 * Refresh health status continously with a interval that can be configured
 * Push Chrome notifications when a cell returns a non-200.
@@ -57,4 +63,5 @@ Each cell contains the primary endpoint, a refresh button and link to 2 supporti
 
 ___
 ## Future Features
-1. Configuration via network URL.
+1. Configurable page title.
+2. ~~Configuration via network URL.~~

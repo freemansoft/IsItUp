@@ -19,11 +19,13 @@ $(document).ready(function () {
 });
 
 function doProcess(items) {
+  // show the options page if we don't have any JSON definition
   if (!items.cfgTxt) {
     chrome.tabs.create({ 'url': "/options.html" })
     return;
   }
   var configuration = JSON.parse(items.cfgTxt);
+  // don't show an error because this could be a new user with no values yet
   if (!configuration) {
     return;
   }
@@ -46,6 +48,7 @@ function doProcess(items) {
     return;
   }
   // verify the number of cols in each row matches the number of col headers
+  // build out a componentMap that has one element for each row. Key = row name, Value = array of columns
   for (var i = 0; i < configuration.rows.length; i++) {
     if (configuration.rows[i].cols.length != hcols.length) {
       setErrorText("Configuration Error: Row "+i+" has "+configuration.rows[i].cols.length+" columns of data provided. This conflicts with the "+hcols.length+" column headers provided");
@@ -53,48 +56,16 @@ function doProcess(items) {
     }
     componentMap[hrows[i]] = configuration.rows[i].cols;
   }
-  // construct column header row
+  layoutTitle(configuration.title);
+  // create table
   var isitupHtml = "<table id='envStatusTbl' class='table table-bordered table-striped table-hover table-condensed'>";
-  isitupHtml += "<thead><tr class='info'><th></th>";
-  for (var i = 0; i < hcols.length; i++) {
-    isitupHtml += ("<th>" + hcols[i].toUpperCase() + "</th>");
-  }
-  isitupHtml += "</tr></thead><tbody>";
-  // we call the columns "environments"
-  var environments = [];
-
-  var spanIdMap = {};
-
-  $.each(componentMap, function (key, value) {
-    // row header
-    isitupHtml += ("<tr><td><b>" + key + "</b></td>");
-    // now each row
-    for (var i = 0; i < value.length; i++) {
-      spanId = uuid();
-      if (value[i].healthUrl) {
-        isitupHtml += ("<td><span id='" + spanId + "'>" + gifLoadingEle + "</span>");
-        // if individual retry is allowed.
-        if (items.allowIndividualRetry) {
-          isitupHtml += (" <span id='refreshId' data='" + spanId + "' class='status-code refresh glyphicon glyphicon-refresh' title='Refresh'></span>");
-        }
-        // setup secondary links as hrefs - they go inside the same cell as primary
-        if (value[i].other) {
-          for (var j = 0; j < value[i].other.length; j++) {
-            isitupHtml += " <a target='_blank' href='" + value[i].other[j].url + "'>" 
-            isitupHtml += "<img src='" + value[i].other[j].icon + "' title='"+value[i].other[j].url+"'/></a> ";
-          }
-        }
-        isitupHtml += "</td>";
-        spanIdMap[spanId] = value[i].healthUrl;
-      } else {
-        isitupHtml += ("<td><span class='status-code na'>" + notApplicable + "</span></td>");
-      }
-
-    }
-    isitupHtml += "</tr>"
-  });
-  isitupHtml += "</tbody></table>";
-  // now update table 
+  // construct column header row
+  isitupHtml += layoutHeader(hcols);
+  // generate the main table HTML markup
+  var spanIdMap = {}
+  isitupHtml += layoutTableBody(componentMap, spanIdMap, items.allowIndividualRetry);
+  isitupHtml += "</table>";
+  // now update web page table 
   $('#isitupId').html(isitupHtml);
   // now check health
   checkHealth(spanIdMap, items.pushNotifications);
@@ -132,6 +103,63 @@ function doProcess(items) {
     $('#status-detail').show();
     $('#health').show();
   });
+}
+
+// sets the title on the page based on the passed in title. 
+// picks a default title if none provided
+function layoutTitle(title){
+  if (title){
+    $('#isitupTitleId').html(title);
+  } else {
+    $('#isitupTitleId').html("Environment Status ");
+  }
+}
+
+function layoutHeader(columnHeaders){
+  var markupHtml = "";
+  markupHtml += "<thead><tr class='info'><th></th>";
+  for (var i = 0; i < columnHeaders.length; i++) {
+    markupHtml += ("<th>" + columnHeaders[i].toUpperCase() + "</th>");
+  }
+  markupHtml += "</tr></thead>";
+  return markupHtml;
+}
+// layout a table and return a map of ids to be used for healthcheck
+// accepts a component map.  updates spanIdMap returns the table body markup
+function layoutTableBody(componentMap, spanIdMap, allowIndividualRetry){
+  var markupHtml = ""
+  markupHtml += "<tbody>";
+  // build out the table one row at a time
+  $.each(componentMap, function (key, value) {
+    // row header
+    markupHtml += ("<tr><td><b>" + key + "</b></td>");
+    // now each row
+    for (var i = 0; i < value.length; i++) {
+      spanId = uuid();
+      if (value[i].healthUrl) {
+        markupHtml += ("<td><span id='" + spanId + "'>" + gifLoadingEle + "</span>");
+        // if individual retry is allowed.
+        if (allowIndividualRetry) {
+          markupHtml += (" <span id='refreshId' data='" + spanId + "' class='status-code refresh glyphicon glyphicon-refresh' title='Refresh'></span>");
+        }
+        // setup secondary links as hrefs - they go inside the same cell as primary
+        if (value[i].other) {
+          for (var j = 0; j < value[i].other.length; j++) {
+            markupHtml += " <a target='_blank' href='" + value[i].other[j].url + "'>" 
+            markupHtml += "<img src='" + value[i].other[j].icon + "' title='"+value[i].other[j].url+"'/></a> ";
+          }
+        }
+        markupHtml += "</td>";
+        spanIdMap[spanId] = value[i].healthUrl;
+      } else {
+        markupHtml += ("<td><span class='status-code na'>" + notApplicable + "</span></td>");
+      }
+
+    }
+    markupHtml += "</tr>"
+  });
+  markupHtml += "</tbody>"
+  return markupHtml;
 }
 
 /**

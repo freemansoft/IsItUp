@@ -1,7 +1,8 @@
 {
+  "title": "Demonstration Status",
   "headers": {
     "cols": "dev/ci,integration,func test,qa,prod azure,prod aws",
-    "rows": "Web App 1,Service 1,Service 2,Service 3"
+    "rows": "Web App 1,Web App 2,Service 1,Service 2"
   },
   "rows": [
     {

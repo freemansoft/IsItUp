@@ -91,7 +91,7 @@ $(document).ready(function () {
 
 });
 
-
+// reads a file, validates as json and puts the json in the text field
 function readSingleFile(evt) {
     //Retrieve the first (and only!) File from the FileList object
     var f = evt.target.files[0];
