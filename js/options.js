@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     // get values from localsync
     chrome.storage.local.get({
-        allowIndividualRetry: false,
+        allowIndividualRetry: true,
         allowAutomaticRefresh: false,
         pushNotifications: false,
         pageRefreshAfter: 0,
@@ -91,7 +91,7 @@ $(document).ready(function () {
 
 });
 
-
+// reads a file, validates as json and puts the json in the text field
 function readSingleFile(evt) {
     //Retrieve the first (and only!) File from the FileList object
     var f = evt.target.files[0];
