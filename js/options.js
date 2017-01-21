@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
     document.getElementById('confFileUpld').addEventListener('change', readSingleFile, false);
 
@@ -8,22 +8,25 @@ $(document).ready(function () {
         allowAutomaticRefresh: false,
         pushNotifications: false,
         pageRefreshAfter: 0,
-        cfgTxt: ""
-    }, function (items) {
+        cfgTxt: "",
+        fileTypeTxt: "json"
+    }, function(items) {
         if (items.cfgTxt) {
             $("textarea[name='cfgTxt']").val(items.cfgTxt);
-        }
-        else {
-            jQuery.get("conf/defaultConf.json", function (data) {
+        } else {
+            jQuery.get("conf/defaultConf.json", function(data) {
                 $("textarea[name='cfgTxt']").val(data);
             });
         }
 
+        if (items.fileTypeTxt) {
+            $('#fileTypeId').val(items.fileTypeTxt);
+        }
 
         if (items.allowIndividualRetry) {
             $('#pageRefreshAfterId').show();
-        }else{
-            items.pageRefreshAfter=0;
+        } else {
+            items.pageRefreshAfter = 0;
         }
         $('#pageRefreshAfter').val(items.pageRefreshAfter);
 
@@ -49,7 +52,7 @@ $(document).ready(function () {
     });
 
     // when allow automatic refresh is enabled
-    $('input:radio[name="allowAutomaticRefresh"]').change(function () {
+    $('input:radio[name="allowAutomaticRefresh"]').change(function() {
         if ($(this).val() == 'Yes') {
             $('#pageRefreshAfterId').show();
         } else {
@@ -58,31 +61,32 @@ $(document).ready(function () {
         }
     });
     // when saved
-    $('#saveBtn').click(function () {
+    $('#saveBtn').click(function() {
         var allowIndividualRetry = ($("input[name=allowIndividualRetry]:checked").val() === 'Yes');
         var allowAutomaticRefresh = ($("input[name=allowAutomaticRefresh]:checked").val() === 'Yes');
         var pushNotifications = ($("input[name=pushNotifications]:checked").val() === 'Yes');
         var pageRefreshAfter = $("input[name=pageRefreshAfter]").val();
         var cfgTxt = $("textarea[name=cfgTxt]").val();
-        if(!allowAutomaticRefresh){
+        var fileTypeTxt = $("#fileTypeId").val();
+        if (!allowAutomaticRefresh) {
             pageRefreshAfter = 0;
         }
-
 
         chrome.storage.local.set({
             allowIndividualRetry: allowIndividualRetry,
             allowAutomaticRefresh: allowAutomaticRefresh,
             pushNotifications: pushNotifications,
             pageRefreshAfter: pageRefreshAfter,
-            cfgTxt: cfgTxt
-        }, function () {
+            cfgTxt: cfgTxt,
+            fileTypeTxt: fileTypeTxt
+        }, function() {
             // Update status to let user know options were saved.
             var status = document.getElementById('status');
             status.textContent = 'Options saved.';
-            setTimeout(function () {
+            setTimeout(function() {
                 status.textContent = '';
             }, 5000);
-            setTimeout(function () {
+            setTimeout(function() {
                 window.close();
             }, 1000)
         });
@@ -96,20 +100,31 @@ function readSingleFile(evt) {
     //Retrieve the first (and only!) File from the FileList object
     var f = evt.target.files[0];
     if (f) {
+        var extension = f.name.split('.').pop();
         var r = new FileReader();
-        r.onload = function (e) {
+        r.onload = function(e) {
             var contents = e.target.result;
-            var isJson = true;
-            try {
-                var json = $.parseJSON(contents);
+            // its a json file, convert into 
+            var isFileValid = true;
+            if ("json" === extension) {
+                try {
+                    $.parseJSON(contents);
+                } catch (err) {
+                    isFileValid = false;
+                }
+            } else if ("yaml" === extension || "yml" === extension) {
+                try {
+                    YAML.parse(contents);
+                } catch (err) {
+                    isFileValid = false;
+                }
             }
-            catch (err) {
-                isJson = false;
-            }
-            if (isJson) {
+
+            if (isFileValid) {
                 $("textarea[name='cfgTxt']").val(contents);
+                $("#fileTypeId").val(extension.toLowerCase());
             } else {
-                alert("Invalid configuration Json file!!");
+                alert("Invalid " + extension + " configuration file!!");
             }
         }
         r.readAsText(f);
@@ -117,4 +132,3 @@ function readSingleFile(evt) {
         alert("Failed to load file");
     }
 }
-
