@@ -83,7 +83,7 @@
                         <div class="form-group" id="pageRefreshAfterId" style="display:none">
                             <label class="col-md-3 control-label" for="pageRefreshAfter">
                         Refresh Page after?
-                </label>
+                           </label>
                             <div class="col-md-8">
                                 <input id="pageRefreshAfter" name="pageRefreshAfter" type="number" placeholder="30" class="form-control input-md" size="10" />
                                 <small class="text-muted">Time in seconds. </small>
@@ -110,6 +110,18 @@
                                 <small class="text-muted">Do you want Notifications when an url goes down?</small>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="confFileViaWeb">
+                        Conf File Url?
+                           </label>
+                            <div class="col-md-8">
+                                <input id="confFileViaWeb" name="confFileViaWeb" type="url" placeholder="" class="form-control input-md" value=""/>
+                                <input id="confFileViaWebBtn" value="Load" name="confFileViaWebBtn" type="button" type="button" class="btn-default" />
+                                <small class="text-muted">Url for config file. </small>
+                            </div>
+                        </div>
+
                         <!-- JSON File-->
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="confFileUpld">JSON/YAML File</label>
