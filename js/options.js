@@ -8,9 +8,19 @@ $(document).ready(function() {
         allowAutomaticRefresh: false,
         pushNotifications: false,
         pageRefreshAfter: 0,
+        cfgUri: "",
         cfgTxt: "",
         fileTypeTxt: "json"
     }, function(items) {
+        //load the demo url if they don't have any. They can clear to remove
+        //Ugh we should have set an initial and then not cleared but....
+        //console.log("storage says cfgUri = "+items.cfgUri);
+        if (items.cfgUri){
+            $("#confFileViaWeb").val(items.cfgUri);
+        } else {
+            $("#confFileViaWeb").val("https://raw.githubusercontent.com/NaveenGurram/IsItUp/master/conf/defaultConf.yaml");
+        }
+        // note we default to a json file even though the default url is YAML. This is mostly for demo purposes
         if (items.cfgTxt) {
             $("textarea[name='cfgTxt']").val(items.cfgTxt);
         } else {
@@ -66,6 +76,7 @@ $(document).ready(function() {
         var allowAutomaticRefresh = ($("input[name=allowAutomaticRefresh]:checked").val() === 'Yes');
         var pushNotifications = ($("input[name=pushNotifications]:checked").val() === 'Yes');
         var pageRefreshAfter = $("input[name=pageRefreshAfter]").val();
+        var cfgUri = $("#confFileViaWeb").val();
         var cfgTxt = $("textarea[name=cfgTxt]").val();
         var fileTypeTxt = $("#fileTypeId").val();
         if (!allowAutomaticRefresh) {
@@ -78,6 +89,7 @@ $(document).ready(function() {
             pushNotifications: pushNotifications,
             pageRefreshAfter: pageRefreshAfter,
             cfgTxt: cfgTxt,
+            cfgUri: cfgUri,
             fileTypeTxt: fileTypeTxt
         }, function() {
             // Update status to let user know options were saved.
@@ -93,7 +105,32 @@ $(document).ready(function() {
 
     });
 
+    // this should all be by mime type not extension :-(
+    $('#confFileViaWebBtn').click(function(){
+        var filePath = document.getElementById('confFileViaWeb').value;
+            if (filePath){
+            var extension = filePath.split('.').pop();
+            // ugh. extension matching
+            if ("json" === extension || "yaml" === extension || "yml" === extension){
+                //console.log('in click method '+filePath);
+                $.get(filePath,
+                    function(fetchedData) {
+                        console.log(fetchedData);
+                        $("textarea[name='cfgTxt']").val(fetchedData);
+                        $("#fileTypeId").val(extension.toLowerCase());
+                        //alert('Configuration loaded successfully \n'+filePath);
+                    }
+                );
+            } else {
+                alert("Invalid filey type" + extension + " as calculated from config file url"); 
+            }
+        } else {
+            alert('Enter a URL before attempting to load configuration');
+        }
+    });
+
 });
+
 
 // reads a file, validates as json and puts the json in the text field
 function readSingleFile(evt) {
