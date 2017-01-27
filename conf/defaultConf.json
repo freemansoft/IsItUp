@@ -1,5 +1,6 @@
 {
-  "title": "Demonstration Status",
+  "version": "1",
+  "title": "Sample Dashboard",
   "headers": {
     "cols": "dev/ci,integration,func test,qa,prod azure,prod aws",
     "rows": "Web App 1,Web App 2,Service 1,Service 2,External Service"
