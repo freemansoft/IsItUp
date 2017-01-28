@@ -107,30 +107,39 @@ $(document).ready(function() {
 
     // this should all be by mime type not extension :-(
     $('#confFileViaWebBtn').click(function(){
-        var filePath = document.getElementById('confFileViaWeb').value;
-            if (filePath){
-            var extension = filePath.split('.').pop();
-            // ugh. extension matching
-            if ("json" === extension || "yaml" === extension || "yml" === extension){
-                //console.log('in click method '+filePath);
-                $.get(filePath,
-                    function(fetchedData) {
-                        console.log(fetchedData);
-                        $("textarea[name='cfgTxt']").val(fetchedData);
-                        $("#fileTypeId").val(extension.toLowerCase());
-                        //alert('Configuration loaded successfully \n'+filePath);
-                    }
-                );
-            } else {
-                alert("Invalid filey type" + extension + " as calculated from config file url"); 
-            }
-        } else {
-            alert('Enter a URL before attempting to load configuration');
-        }
+        var fullUri = document.getElementById('confFileViaWeb').value;
+        loadConfigFromUri(fullUri);
     });
 
 });
 
+// a bit of a hack - take into account query strings when cought up by things like GIT
+// we use the file name extracted from URI path instead of mime type
+function loadConfigFromUri(fullUri){
+    var elementWorker = new URL(fullUri);
+    var filePath = elementWorker.pathname;
+    if (filePath){
+        var extension = filePath.split('.').pop();
+        // ugh. extension matching
+        if ("json" === extension || "yaml" === extension || "yml" === extension){
+            //console.log('in click method '+fullUri);
+            $.get(fullUri)
+                .success(function(fetchedData) {
+                    //console.log(fetchedData);
+                    $("textarea[name='cfgTxt']").val(fetchedData);
+                    $("#fileTypeId").val(extension.toLowerCase());
+                    //alert('Configuration loaded successfully \n'+fullUri);
+                })
+                .error(function(jqXHR, statusText, error) {
+                    alert("Error: "+error+" \n"+"Failed to load: "+fullUri)
+                });
+        } else {
+            alert("Invalid filey type" + extension + " as calculated from config file url"); 
+        }
+    } else {
+        alert('Enter a URL before attempting to load configuration');
+    }
+}
 
 // reads a file, validates as json and puts the json in the text field
 function readSingleFile(evt) {
