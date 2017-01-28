@@ -12,7 +12,7 @@ The configuration and meaning of rows and columns is flexible and is up to the u
 ## Display Elements
 
 ### Customizable Dashboard Title
-See sample json
+The dashboard title can be set in the configuration file. See sample json.
 
 ### Cell Contents
 Each cell contains 
@@ -25,8 +25,13 @@ This image shows a primary link with a 200 return code, the refrish link and hel
 
 ![Extension](https://github.com/NaveenGurram/IsItUp/blob/master/screenshots/IndividualCell.jpg?raw=true "Extension")
 
+### Empty Cells
+Not all cells make sense or have associated URLs. It is possible to just specify an empty string "" in this situation. 
+Empty cells are shown as "N/A". 
+Rows with no active cells are show with all cells blank.
 
 ## Features
+* (1.8) Row with no health urls no longer shows cells with n/a
 * (1.8) Configuration via remote URL. Uses file extenison to determine format.
 * (1.3) YAML config file
 * (1.2) Configure using a file via the options page.

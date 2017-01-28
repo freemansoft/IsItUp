@@ -138,10 +138,11 @@ function layoutTableBody(componentMap, spanIdMap, allowIndividualRetry) {
     $.each(componentMap, function(key, value) {
         // row header
         markupHtml += ("<tr><td><b>" + key + "</b></td>");
-        // now each row
+        // now each column
+        var rowIsBlank = isRowBlank(value);
         for (var i = 0; i < value.length; i++) {
-            spanId = uuid();
             if (value[i].healthUrl) {
+               spanId = uuid();
                 markupHtml += ("<td><span id='" + spanId + "'>" + gifLoadingEle + "</span>");
                 // if individual retry is allowed.
                 if (allowIndividualRetry) {
@@ -156,6 +157,8 @@ function layoutTableBody(componentMap, spanIdMap, allowIndividualRetry) {
                 }
                 markupHtml += "</td>";
                 spanIdMap[spanId] = value[i].healthUrl;
+            } else if (rowIsBlank){
+                markupHtml += ("<td></td>");
             } else {
                 markupHtml += ("<td><span class='status-code na'>" + notApplicable + "</span></td>");
             }
@@ -165,6 +168,17 @@ function layoutTableBody(componentMap, spanIdMap, allowIndividualRetry) {
     });
     markupHtml += "</tbody>"
     return markupHtml;
+}
+
+// return true if all healthcheck urls in the row are blank
+function isRowBlank(value){
+    var rowIsBlank=true;
+    for (var i = 0; i < value.length; i++) {
+        if (value[i].healthUrl){
+            rowIsBlank=false;
+        }
+    }
+    return rowIsBlank;
 }
 
 /**
