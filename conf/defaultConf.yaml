@@ -1,5 +1,6 @@
 ---
-title: Demonstration Status
+version: '1'
+title: Sample Dashboard
 headers:
   cols: dev/ci,integration,func test,qa,prod azure,prod aws
   rows: Web App 1,Web App 2,Service 1,Service 2,External Service
@@ -77,7 +78,7 @@ rows:
     - url: https://chrome.google.com/webstore/search/isitup%20naveen?hl=en
       icon: https://www.google.com/s2/favicons?domain=chrome.google.com
     - url: https://portal.azure.com/
-      icon: https://www.google.com/s2/favicons?domain=azure.microsoft.comm
+      icon: https://www.google.com/s2/favicons?domain=azure.microsoft.com
   - healthUrl: http://headers.jsontest.com/
     other:
     - url: https://chrome.google.com/webstore/search/isitup%20naveen?hl=en
@@ -122,7 +123,7 @@ rows:
     - url: https://chrome.google.com/webstore/search/isitup%20naveen?hl=en
       icon: https://www.google.com/s2/favicons?domain=chrome.google.com
     - url: https://portal.azure.com/
-      icon: https://www.google.com/s2/favicons?domain=azure.microsoft.comm
+      icon: https://www.google.com/s2/favicons?domain=azure.microsoft.com
   - healthUrl: http://headers.jsontest.com/
     other:
     - url: https://chrome.google.com/webstore/search/isitup%20naveen?hl=en
@@ -167,7 +168,7 @@ rows:
     - url: https://chrome.google.com/webstore/search/isitup%20naveen?hl=en
       icon: https://www.google.com/s2/favicons?domain=chrome.google.com
     - url: https://portal.azure.com/
-      icon: https://www.google.com/s2/favicons?domain=azure.microsoft.comm
+      icon: https://www.google.com/s2/favicons?domain=azure.microsoft.com
   - healthUrl: http://headers.jsontest.com/
     other:
     - url: https://chrome.google.com/webstore/search/isitup%20naveen?hl=en
