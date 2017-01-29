@@ -60,14 +60,14 @@ function doProcess(items) {
             setErrorText("Configuration Error: Row " + i + " has " + configuration.rows[i].cols.length + " columns of data provided. This conflicts with the " + hcols.length + " column headers provided");
             return;
         }
-        componentMap[hrows[i]] = configuration.rows[i].cols;
+        componentMap[i] = configuration.rows[i].cols;
     }
     layoutTitle(configuration.title);
     var spanIdMap = {}
         // create table
     var isitupHtml = "<table id='envStatusTbl' class='table table-bordered table-striped table-hover table-condensed'>";
     isitupHtml += layoutHeader(hcols);
-    isitupHtml += layoutTableBody(componentMap, spanIdMap, items.allowIndividualRetry);
+    isitupHtml += layoutTableBody(hrows, componentMap, spanIdMap, items.allowIndividualRetry);
     /// isitupHtml += layoutHeader(hcols);
     isitupHtml += "</table>";
     // now inject markup into web page table 
@@ -131,13 +131,13 @@ function layoutHeader(columnHeaders) {
 }
 // layout a table and return a map of ids to be used for healthcheck
 // accepts a component map.  updates spanIdMap returns the table body markup
-function layoutTableBody(componentMap, spanIdMap, allowIndividualRetry) {
+function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRetry) {
     var markupHtml = ""
     markupHtml += "<tbody>";
     // build out the table one row at a time
     $.each(componentMap, function(key, value) {
         // row header
-        markupHtml += ("<tr><td><b>" + key + "</b></td>");
+        markupHtml += ("<tr><td><b>" + rowHeaders[key] + "</b></td>");
         // now each column
         var rowIsBlank = isRowBlank(value);
         for (var i = 0; i < value.length; i++) {

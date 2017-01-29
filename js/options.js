@@ -93,11 +93,7 @@ $(document).ready(function() {
             fileTypeTxt: fileTypeTxt
         }, function() {
             // Update status to let user know options were saved.
-            var status = document.getElementById('status');
-            status.textContent = 'Options saved.';
-            setTimeout(function() {
-                status.textContent = '';
-            }, 5000);
+            showStatus('Options saved');
             setTimeout(function() {
                 window.close();
             }, 1000)
@@ -125,19 +121,18 @@ function loadConfigFromUri(fullUri){
             //console.log('in click method '+fullUri);
             $.get(fullUri)
                 .success(function(fetchedData) {
-                    //console.log(fetchedData);
                     $("textarea[name='cfgTxt']").val(fetchedData);
                     $("#fileTypeId").val(extension.toLowerCase());
-                    //alert('Configuration loaded successfully \n'+fullUri);
+                    showStatus('Configuration loaded successfully from remote location');
                 })
                 .error(function(jqXHR, statusText, error) {
-                    alert("Error: "+error+" \n"+"Failed to load: "+fullUri)
+                    showStatus('Error: '+error+'Failed to load from remote location');
                 });
         } else {
-            alert("Invalid filey type" + extension + " as calculated from config file url"); 
+            showStatus("Invalid filey type" + extension + " as calculated from config file url"); 
         }
     } else {
-        alert('Enter a URL before attempting to load configuration');
+        showStatus('Enter a URL before attempting to load configuration');
     }
 }
 
@@ -170,11 +165,19 @@ function readSingleFile(evt) {
                 $("textarea[name='cfgTxt']").val(contents);
                 $("#fileTypeId").val(extension.toLowerCase());
             } else {
-                alert("Invalid " + extension + " configuration file!!");
+                showStatus("Invalid " + extension + " configuration file!!");
             }
         }
         r.readAsText(f);
     } else {
-        alert("Failed to load file");
+        showStatus("Failed to load file");
     }
+}
+
+function showStatus(statuString){
+    var status = document.getElementById('status');
+    status.textContent = statuString;
+    setTimeout(function() {
+        status.textContent = '';
+    }, 5000);            
 }
