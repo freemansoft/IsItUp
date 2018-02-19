@@ -3,7 +3,7 @@
     "name": "Is It Up",
     "short_name": "Is It Up",
     "description": "Extension to check if end points are up",
-    "version": "1.10",
+    "version": "1.11",
     "permissions": [
         "storage",
         "tabs",
@@ -24,7 +24,7 @@
             "js/background.js"
         ]
     },
-    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+    "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
     "web_accessible_resources": [
         "img/*.png",
         "conf/*.json",

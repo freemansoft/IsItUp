@@ -44,6 +44,16 @@
               "url": "https://www.dynatrace.com/",
               "icon": "https://www.google.com/s2/favicons?domain=dynatrace.com"
             }
+          ],
+          "badges": [
+            {
+              "url": "http://date.jsontest.com",
+              "jsonPath": "$.date"
+            },
+            {
+              "url": "http://headers.jsontest.com",
+              "jsonPath": "$.X-Cloud-Trace-Context"
+            }
           ]
         },
         {

@@ -144,6 +144,14 @@ function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRet
             if (value[i].healthUrl) {
                spanId = uuid();
                 markupHtml += ("<td><span id='" + spanId + "'>" + gifLoadingEle + "</span>");
+                // check if other badge info needs to be displayed.
+                if(value[i].badges){
+                    for (var bi_i = 0; bi_i < value[i].badges.length; bi_i++){
+                        badgeSpanId = uuid();
+                        markupHtml += ("<span id='" +  badgeSpanId + "' jsonPath='" + escape(value[i].badges[bi_i].jsonPath) + "'>" + gifLoadingEle + "</span>");
+                        spanIdMap[badgeSpanId] = value[i].badges[bi_i].url;
+                    }
+                }
                 // if individual retry is allowed.
                 if (allowIndividualRetry) {
                     markupHtml += (" <span id='refreshId' data='" + spanId + "' class='status-code refresh glyphicon glyphicon-refresh' title='Refresh'></span>");
@@ -195,6 +203,8 @@ function checkHealth(spanIdMap, pushNotifications) {
             // 2xx and notmodified 304
             success: function(data) {
                 var spanData = "";
+                var badgeVal = "200";
+                var badgeCssClass = "status-code success"
                 if (isDataJson(data)) {
                     data.url = value;
                     spanData = stringify(data);
@@ -203,10 +213,20 @@ function checkHealth(spanIdMap, pushNotifications) {
                     jsonObj.url = value;
                     spanData = stringify(jsonObj);
                 }
+                if($('#' + key).attr('jsonPath')){
+                    if(isDataJson(data)) {
+                        spanData = stringify(data);
+                        var jsonEval = unescape($('#' + key).attr('jsonPath'));
+                        badgeVal = jsonPath(data,jsonEval);
+                    }else{
+                        badgeVal = "";
+                    }
+                    badgeCssClass = "status-code badge";
+                } 
                 $('#' + key).removeClass("status-code error");
-                $('#' + key).addClass("status-code success");
+                $('#' + key).addClass(badgeCssClass);
                 $('#' + key).attr('data', spanData);
-                $('#' + key).text("200");
+                $('#' + key).text(badgeVal); 
             },
             error: function(jqXHR, error, errorThrown) {
                 errMsg = "";
