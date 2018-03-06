@@ -10,6 +10,7 @@ $(document).ready(function() {
         allowIndividualRetry: false,
         allowAutomaticRefresh: false,
         pushNotifications: false,
+        showBadges: false,
         pageRefreshAfter: 30,
         cfgTxt: "",
         fileTypeTxt: "json"
@@ -62,12 +63,15 @@ function doProcess(items) {
         }
         componentMap[i] = configuration.rows[i].cols;
     }
+    // setup title
     layoutTitle(configuration.title);
+    // setup badgeShowHideToggle 
+    setupBadgeShowHideToggle(items.showBadges);
     var spanIdMap = {}
         // create table
     var isitupHtml = "<table id='envStatusTbl' class='table table-bordered table-striped table-hover table-condensed'>";
     isitupHtml += layoutHeader(hcols);
-    isitupHtml += layoutTableBody(hrows, componentMap, spanIdMap, items.allowIndividualRetry);
+    isitupHtml += layoutTableBody(hrows, componentMap, spanIdMap, items.allowIndividualRetry, items.showBadges);
     /// isitupHtml += layoutHeader(hcols);
     isitupHtml += "</table>";
     // now inject markup into web page table 
@@ -100,6 +104,22 @@ function doProcess(items) {
             checkHealth(healthMap);
             return;
         }
+        if($(this).attr('data-target')){
+            var dataTargetId = $(this).attr('data-target');
+            if ($(this).hasClass("glyphicon glyphicon-collapse-up")) {
+                $(this).removeClass("glyphicon glyphicon-collapse-up");
+                $(this).addClass("glyphicon glyphicon-collapse-down");
+                return;
+            }
+            if ($(this).hasClass("glyphicon glyphicon-collapse-down")) {
+                $(this).removeClass("glyphicon glyphicon-collapse-down");
+                $(this).addClass("glyphicon glyphicon-collapse-up");
+                return;
+            }
+        }
+
+
+
         var isJson = isDataJson(spanData);
         if (!isJson) {
             spanData = "Not JSON";
@@ -107,6 +127,33 @@ function doProcess(items) {
         $('#status-detail').html(spanData);
         $('#status-detail').show();
         $('#health').show();
+    });
+}
+
+function setupBadgeShowHideToggle(showBadges){
+    if(showBadges){
+        $('#showBadgeToggle').attr("checked", true);
+    }
+    // 'collapse out' is hide, 'collapse in' is expand
+    $('#showBadgeToggle').change(function() {
+        if($(this).is(":checked")) {
+            $('.badgeDivClass').removeClass("collapse out");
+            $('.badgeDivClass').addClass("collapse in");    
+        } else{
+            $('.badgeDivClass').removeClass("collapse in");
+            $('.badgeDivClass').addClass("collapse out");            
+        } 
+        $('span').each(function(){
+            if($(this).attr('data-toggle')=== 'collapse'){
+                if($(this).hasClass('glyphicon glyphicon-collapse-up')){
+                    $(this).removeClass('glyphicon glyphicon-collapse-up');
+                    $(this).addClass('glyphicon glyphicon-collapse-down');
+                }else{
+                    $(this).removeClass('glyphicon glyphicon-collapse-down');
+                    $(this).addClass('glyphicon glyphicon-collapse-up');
+                }
+            }
+        })
     });
 }
 
@@ -131,7 +178,7 @@ function layoutHeader(columnHeaders) {
 }
 // layout a table and return a map of ids to be used for healthcheck
 // accepts a component map.  updates spanIdMap returns the table body markup
-function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRetry) {
+function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRetry,showBadges) {
     var markupHtml = ""
     markupHtml += "<tbody>";
     // build out the table one row at a time
@@ -144,14 +191,6 @@ function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRet
             if (value[i].healthUrl) {
                spanId = uuid();
                 markupHtml += ("<td><span id='" + spanId + "'>" + gifLoadingEle + "</span>");
-                // check if other badge info needs to be displayed.
-                if(value[i].badges){
-                    for (var bi_i = 0; bi_i < value[i].badges.length; bi_i++){
-                        badgeSpanId = uuid();
-                        markupHtml += ("<span id='" +  badgeSpanId + "' jsonPath='" + escape(value[i].badges[bi_i].jsonPath) + "'>" + gifLoadingEle + "</span>");
-                        spanIdMap[badgeSpanId] = value[i].badges[bi_i].url;
-                    }
-                }
                 // if individual retry is allowed.
                 if (allowIndividualRetry) {
                     markupHtml += (" <span id='refreshId' data='" + spanId + "' class='status-code refresh glyphicon glyphicon-refresh' title='Refresh'></span>");
@@ -162,6 +201,26 @@ function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRet
                         markupHtml += " <a target='_blank' href='" + value[i].other[j].url + "'>"
                         markupHtml += "<img alt='' src='" + value[i].other[j].icon + "' title='" + value[i].other[j].url + "'/></a> ";
                     }
+                }
+                // check if other badge info needs to be displayed.
+                if(value[i].badges){
+                    badgeDivId = uuid();
+                    badgeGlyphiconId = uuid();
+                    var badgeGlyphicon = 'glyphicon glyphicon-collapse-down';
+                    var badgeDivClass= 'collapse out';
+                    if(showBadges){
+                        // expand badges, so show collapse up icon.
+                        badgeGlyphicon = 'glyphicon glyphicon-collapse-up';
+                        badgeDivClass= 'collapse in';
+                    }
+                    markupHtml += "<br><span id='"+badgeGlyphiconId+"' class='"+badgeGlyphicon+"' data-toggle='collapse' data-target='#"+badgeDivId+"'></span>";
+                    markupHtml += "<div id='"+badgeDivId+"' class='badgeDivClass "+badgeDivClass+" panel panel-default '>";
+                    for (var bi_i = 0; bi_i < value[i].badges.length; bi_i++){
+                        badgeSpanId = uuid();
+                        markupHtml += ("<span id='" +  badgeSpanId + "' jsonPath='" + escape(value[i].badges[bi_i].jsonPath.trim()) + "'>" + gifLoadingEle + "</span><br>");
+                        spanIdMap[badgeSpanId] = value[i].badges[bi_i].url;
+                    }
+                    markupHtml += "</div>";
                 }
                 markupHtml += "</td>";
                 spanIdMap[spanId] = value[i].healthUrl;
@@ -303,6 +362,5 @@ function setErrorText(text) {
  */
 function uuid() {
     return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
+        .toString(16);
 }

@@ -7,6 +7,7 @@ $(document).ready(function() {
         allowIndividualRetry: true,
         allowAutomaticRefresh: false,
         pushNotifications: false,
+        showBadges: false,
         pageRefreshAfter: 0,
         cfgUri: "",
         cfgTxt: "",
@@ -57,7 +58,11 @@ $(document).ready(function() {
         } else {
             $('#pushNotifications-1').prop('checked', true);
         }
-
+        if (items.showBadges) {
+            $('#showBadges-0').prop('checked', true);
+        } else {
+            $('#showBadges-1').prop('checked', true);
+        }
 
     });
 
@@ -75,6 +80,7 @@ $(document).ready(function() {
         var allowIndividualRetry = ($("input[name=allowIndividualRetry]:checked").val() === 'Yes');
         var allowAutomaticRefresh = ($("input[name=allowAutomaticRefresh]:checked").val() === 'Yes');
         var pushNotifications = ($("input[name=pushNotifications]:checked").val() === 'Yes');
+        var showBadges = ($("input[name=showBadges]:checked").val() === 'Yes');
         var pageRefreshAfter = $("input[name=pageRefreshAfter]").val();
         var cfgUri = $("#confFileViaWeb").val();
         var cfgTxt = $("textarea[name=cfgTxt]").val();
@@ -88,6 +94,7 @@ $(document).ready(function() {
             allowAutomaticRefresh: allowAutomaticRefresh,
             pushNotifications: pushNotifications,
             pageRefreshAfter: pageRefreshAfter,
+            showBadges: showBadges,
             cfgTxt: cfgTxt,
             cfgUri: cfgUri,
             fileTypeTxt: fileTypeTxt
