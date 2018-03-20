@@ -104,7 +104,7 @@ function doProcess(items) {
             checkHealth(healthMap);
             return;
         }
-        if($(this).attr('data-target')){
+        if ($(this).attr('data-target')) {
             var dataTargetId = $(this).attr('data-target');
             if ($(this).hasClass("glyphicon glyphicon-collapse-up")) {
                 $(this).removeClass("glyphicon glyphicon-collapse-up");
@@ -130,25 +130,25 @@ function doProcess(items) {
     });
 }
 
-function setupBadgeShowHideToggle(showBadges){
-    if(showBadges){
+function setupBadgeShowHideToggle(showBadges) {
+    if (showBadges) {
         $('#showBadgeToggle').attr("checked", true);
     }
     // 'collapse out' is hide, 'collapse in' is expand
     $('#showBadgeToggle').change(function() {
-        if($(this).is(":checked")) {
+        if ($(this).is(":checked")) {
             $('.badgeDivClass').removeClass("collapse out");
-            $('.badgeDivClass').addClass("collapse in");    
-        } else{
+            $('.badgeDivClass').addClass("collapse in");
+        } else {
             $('.badgeDivClass').removeClass("collapse in");
-            $('.badgeDivClass').addClass("collapse out");            
-        } 
-        $('span').each(function(){
-            if($(this).attr('data-toggle')=== 'collapse'){
-                if($(this).hasClass('glyphicon glyphicon-collapse-up')){
+            $('.badgeDivClass').addClass("collapse out");
+        }
+        $('span').each(function() {
+            if ($(this).attr('data-toggle') === 'collapse') {
+                if ($(this).hasClass('glyphicon glyphicon-collapse-up')) {
                     $(this).removeClass('glyphicon glyphicon-collapse-up');
                     $(this).addClass('glyphicon glyphicon-collapse-down');
-                }else{
+                } else {
                     $(this).removeClass('glyphicon glyphicon-collapse-down');
                     $(this).addClass('glyphicon glyphicon-collapse-up');
                 }
@@ -178,7 +178,7 @@ function layoutHeader(columnHeaders) {
 }
 // layout a table and return a map of ids to be used for healthcheck
 // accepts a component map.  updates spanIdMap returns the table body markup
-function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRetry,showBadges) {
+function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRetry, showBadges) {
     var markupHtml = ""
     markupHtml += "<tbody>";
     // build out the table one row at a time
@@ -189,7 +189,7 @@ function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRet
         var rowIsBlank = isRowBlank(value);
         for (var i = 0; i < value.length; i++) {
             if (value[i].healthUrl) {
-               spanId = uuid();
+                spanId = uuid();
                 markupHtml += ("<td><span id='" + spanId + "'>" + gifLoadingEle + "</span>");
                 // if individual retry is allowed.
                 if (allowIndividualRetry) {
@@ -203,28 +203,28 @@ function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRet
                     }
                 }
                 // check if other badge info needs to be displayed.
-                if(value[i].badges){
+                if (value[i].badges) {
                     badgeDivId = uuid();
                     badgeGlyphiconId = uuid();
                     var badgeGlyphicon = 'glyphicon glyphicon-collapse-down';
-                    var badgeDivClass= 'collapse out';
-                    if(showBadges){
+                    var badgeDivClass = 'collapse out';
+                    if (showBadges) {
                         // expand badges, so show collapse up icon.
                         badgeGlyphicon = 'glyphicon glyphicon-collapse-up';
-                        badgeDivClass= 'collapse in';
+                        badgeDivClass = 'collapse in';
                     }
-                    markupHtml += "<br><span id='"+badgeGlyphiconId+"' class='"+badgeGlyphicon+"' data-toggle='collapse' data-target='#"+badgeDivId+"'></span>";
-                    markupHtml += "<div id='"+badgeDivId+"' class='badgeDivClass "+badgeDivClass+" panel panel-default '>";
-                    for (var bi_i = 0; bi_i < value[i].badges.length; bi_i++){
+                    markupHtml += "<span id='" + badgeGlyphiconId + "' class='" + badgeGlyphicon + "' data-toggle='collapse' data-target='#" + badgeDivId + "'></span>";
+                    markupHtml += "<div id='" + badgeDivId + "' class='badgeDivClass " + badgeDivClass + " panel panel-default '>";
+                    for (var bi_i = 0; bi_i < value[i].badges.length; bi_i++) {
                         badgeSpanId = uuid();
-                        markupHtml += ("<span id='" +  badgeSpanId + "' jsonPath='" + escape(value[i].badges[bi_i].jsonPath.trim()) + "'>" + gifLoadingEle + "</span><br>");
+                        markupHtml += ("<span id='" + badgeSpanId + "' jsonPath='" + escape(value[i].badges[bi_i].jsonPath.trim()) + "'>" + gifLoadingEle + "</span><br>");
                         spanIdMap[badgeSpanId] = value[i].badges[bi_i].url;
                     }
                     markupHtml += "</div>";
                 }
                 markupHtml += "</td>";
                 spanIdMap[spanId] = value[i].healthUrl;
-            } else if (rowIsBlank){
+            } else if (rowIsBlank) {
                 markupHtml += ("<td></td>");
             } else {
                 markupHtml += ("<td><span class='status-code na'>" + notApplicable + "</span></td>");
@@ -238,11 +238,11 @@ function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRet
 }
 
 // return true if all healthcheck urls in the row are blank
-function isRowBlank(value){
-    var rowIsBlank=true;
+function isRowBlank(value) {
+    var rowIsBlank = true;
     for (var i = 0; i < value.length; i++) {
-        if (value[i].healthUrl){
-            rowIsBlank=false;
+        if (value[i].healthUrl) {
+            rowIsBlank = false;
         }
     }
     return rowIsBlank;
@@ -272,20 +272,20 @@ function checkHealth(spanIdMap, pushNotifications) {
                     jsonObj.url = value;
                     spanData = stringify(jsonObj);
                 }
-                if($('#' + key).attr('jsonPath')){
-                    if(isDataJson(data)) {
+                if ($('#' + key).attr('jsonPath')) {
+                    if (isDataJson(data)) {
                         spanData = stringify(data);
                         var jsonEval = unescape($('#' + key).attr('jsonPath'));
-                        badgeVal = jsonPath(data,jsonEval);
-                    }else{
+                        badgeVal = jsonPath(data, jsonEval);
+                    } else {
                         badgeVal = "";
                     }
                     badgeCssClass = "status-code badge";
-                } 
+                }
                 $('#' + key).removeClass("status-code error");
                 $('#' + key).addClass(badgeCssClass);
                 $('#' + key).attr('data', spanData);
-                $('#' + key).text(badgeVal); 
+                $('#' + key).text(badgeVal);
             },
             error: function(jqXHR, error, errorThrown) {
                 errMsg = "";
