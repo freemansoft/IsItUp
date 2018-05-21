@@ -19,11 +19,22 @@ rows:
     - url: https://github.com/NaveenGurram/IsItUp
       icon: https://www.google.com/s2/favicons?domain=github.com
   - healthUrl: http://headers.jsontest.com/
+    method: POST
+    headers:
+    - name: something2
+      value: something2
+    - name: something1
+      value: something1
     other:
     - url: https://www.elastic.co/
       icon: https://www.google.com/s2/favicons?domain=elastic.co
     - url: https://www.dynatrace.com/
       icon: https://www.google.com/s2/favicons?domain=dynatrace.com
+    badges:
+    - url: http://date.jsontest.com
+      jsonPath: "$.date"
+    - url: http://headers.jsontest.com
+      jsonPath: "$.X-Cloud-Trace-Context"
   - healthUrl: http://panen.nl/asd
     other:
     - url: https://www.elastic.co/
@@ -53,17 +64,12 @@ rows:
       icon: https://www.google.com/s2/favicons?domain=atlassian.com
     - url: https://github.com/NaveenGurram/IsItUp
       icon: https://www.google.com/s2/favicons?domain=github.com
-    badges:
-    - url: http://date.jsontest.com
-      jsonPath: $.date      
-    - url: http://headers.jsontest.com
-      jsonPath: $.X-Cloud-Trace-Context       
   - healthUrl: http://headers.jsontest.com/
     other:
     - url: https://www.appdynamics.com/
       icon: https://www.google.com/s2/favicons?domain=appdynamics.com
     - url: https://www.splunk.com/
-      icon: https://www.google.com/s2/favicons?domain=splunk.com       
+      icon: https://www.google.com/s2/favicons?domain=splunk.com
   - healthUrl: http://headers.jsontest.com/
     other:
     - url: https://www.appdynamics.com/
@@ -196,3 +202,4 @@ rows:
   - healthUrl: ''
   - healthUrl: http://headers.jsontest.com/
     other: []
+

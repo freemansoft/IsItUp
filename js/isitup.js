@@ -67,8 +67,8 @@ function doProcess(items) {
     layoutTitle(configuration.title);
     // setup badgeShowHideToggle 
     setupBadgeShowHideToggle(items.showBadges);
-    var spanIdMap = {}
-        // create table
+    var spanIdMap = {};
+    // create table
     var isitupHtml = "<table id='envStatusTbl' class='table table-bordered table-striped table-hover table-condensed'>";
     isitupHtml += layoutHeader(hcols);
     isitupHtml += layoutTableBody(hrows, componentMap, spanIdMap, items.allowIndividualRetry, items.showBadges);
@@ -214,7 +214,7 @@ function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRet
                         badgeDivClass = 'collapse in';
                     }
                     markupHtml += "<span id='" + badgeGlyphiconId + "' class='" + badgeGlyphicon + "' data-toggle='collapse' data-target='#" + badgeDivId + "'></span>";
-                    markupHtml += "<div id='" + badgeDivId + "' class='badgeDivClass " + badgeDivClass + " panel panel-default '>";
+                    markupHtml += "<div id='" + badgeDivId + "' class='badgeDivClass " + badgeDivClass + " '>";
                     for (var bi_i = 0; bi_i < value[i].badges.length; bi_i++) {
                         badgeSpanId = uuid();
                         markupHtml += ("<span id='" + badgeSpanId + "' jsonPath='" + escape(value[i].badges[bi_i].jsonPath.trim()) + "'>" + gifLoadingEle + "</span><br>");
@@ -223,7 +223,7 @@ function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRet
                     markupHtml += "</div>";
                 }
                 markupHtml += "</td>";
-                spanIdMap[spanId] = value[i].healthUrl;
+                spanIdMap[spanId] = { "url": value[i].healthUrl, "method": (value[i].method) ? value[i].method : "GET", "headers": value[i].headers };
             } else if (rowIsBlank) {
                 markupHtml += ("<td></td>");
             } else {
@@ -257,19 +257,26 @@ function checkHealth(spanIdMap, pushNotifications) {
     // http://api.jquery.com/jquery.ajax/
     $.each(spanIdMap, function(key, value) {
         $.ajax({
-            url: value,
-            type: 'GET',
+            url: value.url,
+            type: value.method,
+            beforeSend: function(xhr) {
+                if (value.headers) {
+                    for (var hi_i = 0; hi_i < value.headers.length; hi_i++) {
+                        xhr.setRequestHeader(value.headers[hi_i].name, value.headers[hi_i].value);
+                    }
+                }
+            },
             // 2xx and notmodified 304
             success: function(data) {
                 var spanData = "";
                 var badgeVal = "200";
                 var badgeCssClass = "status-code success"
                 if (isDataJson(data)) {
-                    data.url = value;
+                    data.url = value.url;
                     spanData = stringify(data);
                 } else {
                     var jsonObj = {};
-                    jsonObj.url = value;
+                    jsonObj.url = value.url;
                     spanData = stringify(jsonObj);
                 }
                 if ($('#' + key).attr('jsonPath')) {
@@ -293,25 +300,25 @@ function checkHealth(spanIdMap, pushNotifications) {
                     var statusData = {};
                     statusData.error = errorThrown;
                     errMsg += "with error '" + errorThrown + "' \n";
-                    statusData.url = value;
+                    statusData.url = value.url;
                     $('#' + key).addClass("status-code error");
                     $('#' + key).attr('data', stringify(statusData));
                     $('#' + key).text(jqXHR.status);
                 } else {
                     var statusData = {};
                     statusData.error = 'Failed to send xmlhttprequest';
-                    statusData.url = value;
+                    statusData.url = value.url;
                     $('#' + key).addClass("status-code error");
                     $('#' + key).attr('data', stringify(statusData));
                     $('#' + key).text(jqXHR.status);
                 }
-                errMsg += "URL is " + value;
+                errMsg += "URL is " + value.url;
                 if (pushNotifications) {
                     sendNotification((key + " is down!!!"), errMsg);
                 }
             },
             complete: function() {
-                $('#' + key).attr('title', value);
+                $('#' + key).attr('title', value.url);
             }
         });
     });
