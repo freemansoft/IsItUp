@@ -218,7 +218,11 @@ function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRet
                     for (var bi_i = 0; bi_i < value[i].badges.length; bi_i++) {
                         badgeSpanId = uuid();
                         markupHtml += ("<span id='" + badgeSpanId + "' jsonPath='" + escape(value[i].badges[bi_i].jsonPath.trim()) + "'>" + gifLoadingEle + "</span><br>");
-                        spanIdMap[badgeSpanId] = value[i].badges[bi_i].url;
+                        spanIdMap[badgeSpanId] = {
+                            "url": value[i].badges[bi_i].url,
+                            "method": (value[i].badges[bi_i].method) ? value[i].badges[bi_i].method : "GET",
+                            "headers": value[i].badges[bi_i].headers
+                        };
                     }
                     markupHtml += "</div>";
                 }
