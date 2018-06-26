@@ -31,14 +31,20 @@ Empty cells are shown as "N/A".
 Rows with no active cells are show with all cells blank.
 
 ## Features
-* (1.8) Row with no health urls no longer shows cells with n/a
-* (1.8) Configuration via remote URL. Uses file extenison to determine format.
-* (1.3) YAML config file
-* (1.2) Configure using a file via the options page.
-* (1.1) Enter or paste JSON on the options page.
-* (1.1) Refresh health status continously with a interval that can be configured
-* (1.1) Push Chrome notifications when a cell returns a non-200.
-* (1.0) JSON configuration
+* (1.14) Provision to send additional headers.
+* (1.13) Provision to configure differet http verb instead of GET
+* (1.12) Ability to show/hide badges globally
+* (1.11) Ability to support badges showing additional information
+* (1.10) Bug fixes.
+* (1.9)  Fixed bug with image width
+* (1.8)  Row with no health urls no longer shows cells with n/a
+* (1.8)  Configuration via remote URL. Uses file extenison to determine format.
+* (1.3)  YAML config file
+* (1.2)  Configure using a file via the options page.
+* (1.1)  Enter or paste JSON on the options page.
+* (1.1)  Refresh health status continously with a interval that can be configured
+* (1.1)  Push Chrome notifications when a cell returns a non-200.
+* (1.0)  JSON configuration
 
 ## Installation Steps
 Load like any other chrome extension
@@ -89,5 +95,4 @@ Each cell contains the primary endpoint, a refresh button and link to 2 supporti
 
 ___
 ## Future Features
-1. ~~Configurable page title.~~
-2. ~~Configuration via network URL.~~
+1. Row level badge support
