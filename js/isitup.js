@@ -11,6 +11,8 @@ $(document).ready(function() {
         allowAutomaticRefresh: false,
         pushNotifications: false,
         showBadges: false,
+        uweStatusCode: 206,        
+        color: '#ffcc00',
         pageRefreshAfter: 30,
         cfgTxt: "",
         fileTypeTxt: "json"
@@ -23,7 +25,7 @@ $(document).ready(function() {
 function doProcess(items) {
     // show the options page if we don't have any JSON definition
     if (!items.cfgTxt) {
-        chrome.tabs.create({ 'url': "/options.html" })
+        chrome.tabs.create({ 'url': "/options.html" });
         return;
     }
     var configuration;
@@ -77,13 +79,13 @@ function doProcess(items) {
     // now inject markup into web page table 
     $('#isitupId').html(isitupHtml);
     // now check health
-    checkHealth(spanIdMap, items.pushNotifications);
+    checkHealth(spanIdMap, items.pushNotifications, items);
     // allow automatic refresh
     if (items.allowAutomaticRefresh && items.pageRefreshAfter > 0) {
         // refresh status every x seconds
         window.setInterval(function() {
             /// call your function here
-            checkHealth(spanIdMap, items.pushNotifications);
+            checkHealth(spanIdMap, items.pushNotifications, items);
         }, parseInt(items.pageRefreshAfter * 1000));
     }
 
@@ -255,7 +257,7 @@ function isRowBlank(value) {
 /**
  * Check health of each url.
  */
-function checkHealth(spanIdMap, pushNotifications) {
+function checkHealth(spanIdMap, pushNotifications, items) {
     // now fire all url's and callback will update span with corresponding style and the content.
     // Deprecation Notice: The jqXHR.success(), jqXHR.error(), and jqXHR.complete() callbacks are removed as of jQuery 3.0. You can use jqXHR.done(), jqXHR.fail(), and jqXHR.always() instead.
     // http://api.jquery.com/jquery.ajax/
@@ -274,9 +276,20 @@ function checkHealth(spanIdMap, pushNotifications) {
             success: function(data) {
                 var spanData = "";
                 var badgeVal = "200";
-                var badgeCssClass = "status-code success"
+                var badgeCssClass = "status-code success";
                 if (isDataJson(data)) {
                     data.url = value.url;
+                    if(data.hasOwnProperty("data") && data.data.hasOwnProperty("app-status"))
+                        if(data.data["app-status"].status==="UP_WITH_ERRORS")
+                    {   
+                        if(items.uweStatusCode&&items.uweStatusCode!=="")
+                            badgeVal = items.uweStatusCode+"";
+                        else
+                            badgeVal = 206+"";
+                        badgeCssClass = "status-code up-with-errors";
+                        $('#' + key).css('background-color',items.color);
+                    }
+                            
                     spanData = stringify(data);
                 } else {
                     var jsonObj = {};

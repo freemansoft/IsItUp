@@ -9,6 +9,8 @@ $(document).ready(function() {
         pushNotifications: false,
         showBadges: false,
         pageRefreshAfter: 0,
+        uweStatusCode: 206,
+        color: "#ffcc00",
         cfgUri: "",
         cfgTxt: "",
         fileTypeTxt: "json"
@@ -63,6 +65,12 @@ $(document).ready(function() {
         } else {
             $('#showBadges-1').prop('checked', true);
         }
+        if(items.uweStatusCode){
+            $("#uweStatusCode").val(items.uweStatusCode);
+        } 
+        if(items.color){
+            $("#uweStatusColor").val(items.color);
+        }
 
     });
 
@@ -85,6 +93,8 @@ $(document).ready(function() {
         var cfgUri = $("#confFileViaWeb").val();
         var cfgTxt = $("textarea[name=cfgTxt]").val();
         var fileTypeTxt = $("#fileTypeId").val();
+        var uweStatusCode = $('#uweStatusCode').val();
+        var color = $("#uweStatusColor").val();
         if (!allowAutomaticRefresh) {
             pageRefreshAfter = 0;
         }
@@ -97,7 +107,9 @@ $(document).ready(function() {
             showBadges: showBadges,
             cfgTxt: cfgTxt,
             cfgUri: cfgUri,
-            fileTypeTxt: fileTypeTxt
+            fileTypeTxt: fileTypeTxt,
+            uweStatusCode: uweStatusCode,
+            color:color
         }, function() {
             // Update status to let user know options were saved.
             showStatus('Options saved');

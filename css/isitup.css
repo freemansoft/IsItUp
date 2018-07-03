@@ -23,13 +23,21 @@
   background-color: green;
   color: #fff;
 }
-.refresh{
-  background-color: transparent;
+
+.up-with-errors{
+    background-color: #ffcc00;
+    color: #000000;
 }
+
 .error {
   background-color: red;
   color: white;
 }
+
+.refresh{
+  background-color: transparent;
+}
+
 .na {
   background-color: lightgrey;
   color: white;
