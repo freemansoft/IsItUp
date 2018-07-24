@@ -31,6 +31,8 @@ Empty cells are shown as "N/A".
 Rows with no active cells are show with all cells blank.
 
 ## Features
+* (1.16) Provision to send additional headers.
+* (1.15) New feature to mark partial up with a reason code and color of choice.
 * (1.14) Provision to send additional headers.
 * (1.13) Provision to configure differet http verb instead of GET
 * (1.12) Ability to show/hide badges globally
