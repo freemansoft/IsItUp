@@ -173,7 +173,7 @@ function layoutHeader(columnHeaders) {
     var markupHtml = "";
     markupHtml += "<thead><tr class='info'><th></th>";
     for (var i = 0; i < columnHeaders.length; i++) {
-        markupHtml += ("<th>" + columnHeaders[i].toUpperCase() + "</th>");
+        markupHtml += ("<th>" + columnHeaders[i].toUpperCase() +'<div class="checkbox" ><label><input type="checkbox" class="buildid" id=' +i+ ' value="">Show BuildId</label></div>' + "</th>");
     }
     markupHtml += "</tr></thead>";
     return markupHtml;
@@ -186,7 +186,7 @@ function layoutTableBody(rowHeaders, componentMap, spanIdMap, allowIndividualRet
     // build out the table one row at a time
     $.each(componentMap, function(key, value) {
         // row header
-        markupHtml += ("<tr><td><b>" + rowHeaders[key] + "</b></td>");
+        markupHtml += ("<tr><td class='rowwise'><b>" + rowHeaders[key] + "</b></td>");
         // now each column
         var rowIsBlank = isRowBlank(value);
         for (var i = 0; i < value.length; i++) {
@@ -254,6 +254,7 @@ function isRowBlank(value) {
     return rowIsBlank;
 }
 
+
 /**
  * Check health of each url.
  */
@@ -275,21 +276,23 @@ function checkHealth(spanIdMap, pushNotifications, items) {
             // 2xx and notmodified 304
             success: function(data) {
                 var spanData = "";
+                var buildId = "Not Available";
                 var badgeVal = "200";
                 var badgeCssClass = "status-code success";
                 if (isDataJson(data)) {
                     data.url = value.url;
-                    if(data.hasOwnProperty("data") && data.data.hasOwnProperty("app-status"))
+                    if(data.hasOwnProperty("data") && data.data.hasOwnProperty("app-status")){
+                        buildId = data.data["app-status"].buildId;
                         if(data.data["app-status"].status==="UP_WITH_ERRORS")
-                    {   
-                        if(items.uweStatusCode&&items.uweStatusCode!=="")
-                            badgeVal = items.uweStatusCode+"";
-                        else
-                            badgeVal = 206+"";
-                        badgeCssClass = "status-code up-with-errors";
-                        $('#' + key).css('background-color',items.color);
-                    }
-                            
+                        {   
+                            if(items.uweStatusCode&&items.uweStatusCode!=="")
+                                badgeVal = items.uweStatusCode+"";
+                            else
+                                badgeVal = 206+"";
+                            badgeCssClass = "status-code up-with-errors";
+                            $('#' + key).css('background-color',items.color);
+                        }
+                    }       
                     spanData = stringify(data);
                 } else {
                     var jsonObj = {};
@@ -310,6 +313,7 @@ function checkHealth(spanIdMap, pushNotifications, items) {
                 $('#' + key).addClass(badgeCssClass);
                 $('#' + key).attr('data', spanData);
                 $('#' + key).text(badgeVal);
+                $('#' + key).parent().append("<br/><span class='status-code label' style='display:none'>" + buildId + "</span>")
             },
             error: function(jqXHR, error, errorThrown) {
                 errMsg = "";
@@ -388,3 +392,37 @@ function uuid() {
     return Math.floor((1 + Math.random()) * 0x10000)
         .toString(16);
 }
+
+$(document).on('click', '.buildid', function() {
+   var id= $(this).attr('id');
+   var i = parseInt(id);
+   i=i+2;
+   if ($(this).is(":checked")) {
+        $("table").find("tr td:nth-child("+i+")").each(function(){
+             $(this).find(".label").css({"display" : "block"});
+         });
+   }
+   else{
+        $("table").find("tr td:nth-child("+i+")").each(function(){
+             $(this).find(".label").css({"display" : "none"});
+         });
+   }
+});
+
+$(document).on('click', '.rowwise', function() {
+   var id= $(this).closest("tr").index();
+   var i = parseInt(id);
+   i=i+1;
+    if (!$(this).attr('data-toggled') || $(this).attr('data-toggled') == 'off'){
+           $(this).attr('data-toggled','on');
+           $("table").find("tr:eq("+i+") td").each(function(){
+             $(this).find(".label").css({"display" : "block"});
+            });
+    }
+    else if ($(this).attr('data-toggled') == 'on'){
+           $(this).attr('data-toggled','off');
+           $("table").find("tr:eq("+i+") td").each(function(){
+             $(this).find(".label").css({"display" : "none"});
+            });
+    }
+});
