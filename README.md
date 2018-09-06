@@ -31,6 +31,8 @@ Empty cells are shown as "N/A".
 Rows with no active cells are show with all cells blank.
 
 ## Features
+* (1.18) Toggle buildId header on row level using options page.
+* (1.17) Option to show buildId (response have to follow certain structure)
 * (1.16) Provision to send additional headers.
 * (1.15) New feature to mark partial up with a reason code and color of choice.
 * (1.14) Provision to send additional headers.

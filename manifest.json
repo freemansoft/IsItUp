@@ -3,7 +3,7 @@
     "name": "Is It Up",
     "short_name": "Is It Up",
     "description": "Extension to check if end points are up",
-    "version": "1.18",
+    "version": "1.19",
     "permissions": [
         "storage",
         "tabs",
