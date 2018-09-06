@@ -119,10 +119,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                                <label class="col-md-3 control-label"></label>
-                                <div class="col-md-8">
-                                    <small class="text-muted">Do you want Notifications when an url goes down?</small>
-                                </div>
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-8">
+                                <small class="text-muted">Do you want Notifications when an url goes down?</small>
+                            </div>
                         </div>
                         <!-- show badges -->
                         <div class="form-group">
@@ -137,20 +137,39 @@
                                     No
                                 </label>
                             </div>
-                        </div>                        
+                        </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label"></label>
                             <div class="col-md-8">
                                 <small class="text-muted">Do you want show or hide badges?</small>
                             </div>
                         </div>
-
+                        <!-- show build id -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="showBuildId">Show BuildId</label>
+                            <div class="col-md-8">
+                                <label class="radio-inline" for="showBuildId-0">
+                                <input type="radio" name="showBuildId" id="showBuildId-0" value="Yes" checked="checked" />
+                                    Yes
+                                </label>
+                                <label class="radio-inline" for="showBuildId-1">
+                                    <input type="radio" name="showBuildId" id="showBuildId-1" value="No"  />
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-8">
+                                <small class="text-muted">Do you want show or hide buildId?</small>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="confFileViaWeb">
                         Conf File Url?
                            </label>
                             <div class="col-md-8">
-                                <input id="confFileViaWeb" name="confFileViaWeb" type="url" placeholder="" class="form-control input-md" value=""/>
+                                <input id="confFileViaWeb" name="confFileViaWeb" type="url" placeholder="" class="form-control input-md" value="" />
                                 <input id="confFileViaWebBtn" value="Load" name="confFileViaWebBtn" type="button" type="button" class="btn-default" />
                                 <small class="text-muted">Url for config file. </small>
                             </div>
