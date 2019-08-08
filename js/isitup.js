@@ -317,7 +317,9 @@ function checkHealth(spanIdMap, pushNotifications, items) {
                 $('#' + key).addClass(badgeCssClass);
                 $('#' + key).attr('data', spanData);
                 $('#' + key).text(badgeVal);
-                $('#' + key).parent().append("<br/><span class='status-code label' style='display:none'>" + buildId + "</span>")
+                if (buildId !== 'Not Available') {
+                    $('#' + key).parent().append("<br/><span class='status-code label' style='display:none'>" + buildId + "</span>")
+                }
             },
             error: function(jqXHR, error, errorThrown) {
                 errMsg = "";
