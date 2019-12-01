@@ -35,6 +35,7 @@ Rows with no active cells are show with all cells blank.
 
 ## Features
 
+- (1.21) Updated default conf files.
 - (1.20) Updated code to show real status code for success.
 - (1.19) Fixed bug
 - (1.18) Toggle buildId header on row level using options page.
