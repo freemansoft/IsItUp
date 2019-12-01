@@ -3,14 +3,8 @@
   "name": "Is It Up",
   "short_name": "Is It Up",
   "description": "Extension to check if end points are up",
-  "version": "1.20",
-  "permissions": [
-    "storage",
-    "tabs",
-    "<all_urls>",
-    "activeTab",
-    "notifications"
-  ],
+  "version": "1.21",
+  "permissions": ["storage", "tabs", "activeTab", "notifications"],
   "browser_action": {
     "default_icon": "img/isitup128.png"
   },
