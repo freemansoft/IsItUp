@@ -3,8 +3,6 @@
  * Custom CSS
  *	
  */
-
-
 .status-code {
   color: black;
   margin: 0;
@@ -25,8 +23,10 @@
   background-color: green;
   color: #fff;
 }
-.refresh{
-  background-color: transparent;
+
+.up-with-errors{
+    background-color: #ffcc00;
+    color: #000000;
 }
 
 .error {
@@ -34,9 +34,30 @@
   color: white;
 }
 
+.refresh{
+  background-color: transparent;
+}
+
 .na {
   background-color: lightgrey;
   color: white;
 }
 
+.badge{
+  background-color: grey;
+  color: white;
+  height: 20px;
+  min-width: 135px;
+  width: auto;
+}
 
+.label{
+  border-radius: 10px;
+  background-color: lightgrey;
+  color: white;
+  width: auto;
+}
+
+.rowwise{
+  cursor: pointer;
+}

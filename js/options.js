@@ -7,7 +7,11 @@ $(document).ready(function() {
         allowIndividualRetry: true,
         allowAutomaticRefresh: false,
         pushNotifications: false,
+        showBadges: false,
+        showBuildId: false,
         pageRefreshAfter: 0,
+        uweStatusCode: 206,
+        color: "#ffcc00",
         cfgUri: "",
         cfgTxt: "",
         fileTypeTxt: "json"
@@ -15,7 +19,7 @@ $(document).ready(function() {
         //load the demo url if they don't have any. They can clear to remove
         //Ugh we should have set an initial and then not cleared but....
         //console.log("storage says cfgUri = "+items.cfgUri);
-        if (items.cfgUri){
+        if (items.cfgUri) {
             $("#confFileViaWeb").val(items.cfgUri);
         } else {
             $("#confFileViaWeb").val("https://raw.githubusercontent.com/NaveenGurram/IsItUp/master/conf/defaultConf.yaml");
@@ -57,7 +61,22 @@ $(document).ready(function() {
         } else {
             $('#pushNotifications-1').prop('checked', true);
         }
-
+        if (items.showBadges) {
+            $('#showBadges-0').prop('checked', true);
+        } else {
+            $('#showBadges-1').prop('checked', true);
+        }
+        if (items.showBuildId) {
+            $('#showBuildId-0').prop('checked', true);
+        } else {
+            $('#showBuildId-1').prop('checked', true);
+        }
+        if (items.uweStatusCode) {
+            $("#uweStatusCode").val(items.uweStatusCode);
+        }
+        if (items.color) {
+            $("#uweStatusColor").val(items.color);
+        }
 
     });
 
@@ -75,10 +94,14 @@ $(document).ready(function() {
         var allowIndividualRetry = ($("input[name=allowIndividualRetry]:checked").val() === 'Yes');
         var allowAutomaticRefresh = ($("input[name=allowAutomaticRefresh]:checked").val() === 'Yes');
         var pushNotifications = ($("input[name=pushNotifications]:checked").val() === 'Yes');
+        var showBadges = ($("input[name=showBadges]:checked").val() === 'Yes');
+        var showBuildId = ($("input[name=showBuildId]:checked").val() === 'Yes');
         var pageRefreshAfter = $("input[name=pageRefreshAfter]").val();
         var cfgUri = $("#confFileViaWeb").val();
         var cfgTxt = $("textarea[name=cfgTxt]").val();
         var fileTypeTxt = $("#fileTypeId").val();
+        var uweStatusCode = $('#uweStatusCode').val();
+        var color = $("#uweStatusColor").val();
         if (!allowAutomaticRefresh) {
             pageRefreshAfter = 0;
         }
@@ -88,9 +111,13 @@ $(document).ready(function() {
             allowAutomaticRefresh: allowAutomaticRefresh,
             pushNotifications: pushNotifications,
             pageRefreshAfter: pageRefreshAfter,
+            showBadges: showBadges,
+            showBuildId: showBuildId,
             cfgTxt: cfgTxt,
             cfgUri: cfgUri,
-            fileTypeTxt: fileTypeTxt
+            fileTypeTxt: fileTypeTxt,
+            uweStatusCode: uweStatusCode,
+            color: color
         }, function() {
             // Update status to let user know options were saved.
             showStatus('Options saved');
@@ -102,7 +129,7 @@ $(document).ready(function() {
     });
 
     // this should all be by mime type not extension :-(
-    $('#confFileViaWebBtn').click(function(){
+    $('#confFileViaWebBtn').click(function() {
         var fullUri = document.getElementById('confFileViaWeb').value;
         loadConfigFromUri(fullUri);
     });
@@ -111,13 +138,13 @@ $(document).ready(function() {
 
 // a bit of a hack - take into account query strings when cought up by things like GIT
 // we use the file name extracted from URI path instead of mime type
-function loadConfigFromUri(fullUri){
+function loadConfigFromUri(fullUri) {
     var elementWorker = new URL(fullUri);
     var filePath = elementWorker.pathname;
-    if (filePath){
+    if (filePath) {
         var extension = filePath.split('.').pop();
         // ugh. extension matching
-        if ("json" === extension || "yaml" === extension || "yml" === extension){
+        if ("json" === extension || "yaml" === extension || "yml" === extension) {
             //console.log('in click method '+fullUri);
             $.get(fullUri)
                 .success(function(fetchedData) {
@@ -126,10 +153,10 @@ function loadConfigFromUri(fullUri){
                     showStatus('Configuration loaded successfully from remote location');
                 })
                 .error(function(jqXHR, statusText, error) {
-                    showStatus('Error: '+error+'Failed to load from remote location');
+                    showStatus('Error: ' + error + 'Failed to load from remote location');
                 });
         } else {
-            showStatus("Invalid filey type" + extension + " as calculated from config file url"); 
+            showStatus("Invalid filey type" + extension + " as calculated from config file url");
         }
     } else {
         showStatus('Enter a URL before attempting to load configuration');
@@ -174,10 +201,10 @@ function readSingleFile(evt) {
     }
 }
 
-function showStatus(statuString){
+function showStatus(statuString) {
     var status = document.getElementById('status');
     status.textContent = statuString;
     setTimeout(function() {
         status.textContent = '';
-    }, 5000);            
+    }, 5000);
 }

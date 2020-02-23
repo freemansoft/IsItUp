@@ -18,15 +18,20 @@
         <div class="row">
             <div class="col-md-6">
                 <h4>
-                    <div id="isitupTitleId"></div>
+                    <div id="isitupTitleId"></div><br>
                 </h4>
             </div>
-            <div class="col-md-4"> </div>
+            <div class="col-md-4"></div>
             <div class="col-md-1">
                 <h4><small><a href='./options.html' target='_blank'>Options</a></small></h4>
             </div>
             <div class="col-md-1">
                 <h4><small><a href='./help.html' target='_blank'>Help</a></small></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            <h5>Show/Hide Badges: <input type="checkbox" id="showBadgeToggle"/> </h5>
             </div>
         </div>
         <div class="row">
@@ -38,7 +43,7 @@
         <div class="row">
             <!-- The message body returned by healthcheck call. Blank until one of the return codes clicked.-->
             <div class="col-md-10">
-                <h4 id='health' style="display:none">Health Check Output</h4>
+                <h4 id='health' style="display:none">Health/Badge check Output</h4>
                 <p><pre style="display:none" id="status-detail"></pre></p>
             </div>
         </div>
@@ -48,6 +53,7 @@
     <script src="js/bootstrap.3.3.5.min.js"></script>
     <script src="js/isitup.js"></script>
     <script src="js/yaml.min.js"></script>
+    <script src="js/jsonpath-0.8.0.js"></script>
 
 </body>
 

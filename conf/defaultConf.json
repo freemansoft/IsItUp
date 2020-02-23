@@ -34,7 +34,18 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/200/",
+          "method": "POST",
+          "headers": [
+            {
+              "name": "something2",
+              "value": "something2"
+            },
+            {
+              "name": "something1",
+              "value": "something1"
+            }
+          ],
           "other": [
             {
               "url": "https://www.elastic.co/",
@@ -43,6 +54,16 @@
             {
               "url": "https://www.dynatrace.com/",
               "icon": "https://www.google.com/s2/favicons?domain=dynatrace.com"
+            }
+          ],
+          "badges": [
+            {
+              "url": "http://date.jsontest.com",
+              "jsonPath": "$.date"
+            },
+            {
+              "url": "https://httpstat.us/409",
+              "jsonPath": "$.X-Cloud-Trace-Context"
             }
           ]
         },
@@ -64,7 +85,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/403/",
           "other": [
             {
               "url": "https://www.elastic.co/",
@@ -87,7 +108,7 @@
     {
       "cols": [
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/200/",
           "other": [
             {
               "url": "http://swagger.io/",
@@ -112,7 +133,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/200/",
           "other": [
             {
               "url": "https://www.appdynamics.com/",
@@ -125,7 +146,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/200/",
           "other": [
             {
               "url": "https://www.appdynamics.com/",
@@ -142,7 +163,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/200/",
           "other": [
             {
               "url": "https://www.appdynamics.com/",
@@ -155,7 +176,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/200/",
           "other": [
             {
               "url": "https://chrome.google.com/webstore/search/isitup%20naveen?hl=en",
@@ -168,7 +189,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/200/",
           "other": [
             {
               "url": "https://chrome.google.com/webstore/search/isitup%20naveen?hl=en",
@@ -185,7 +206,7 @@
     {
       "cols": [
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/200/",
           "other": [
             {
               "url": "http://swagger.io/",
@@ -210,7 +231,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/200/",
           "other": [
             {
               "url": "https://www.appdynamics.com/",
@@ -223,7 +244,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/200/",
           "other": [
             {
               "url": "https://www.appdynamics.com/",
@@ -240,7 +261,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/200/",
           "other": [
             {
               "url": "https://www.appdynamics.com/",
@@ -253,7 +274,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/502/",
           "other": [
             {
               "url": "https://chrome.google.com/webstore/search/isitup%20naveen?hl=en",
@@ -266,7 +287,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/500/",
           "other": [
             {
               "url": "https://chrome.google.com/webstore/search/isitup%20naveen?hl=en",
@@ -283,7 +304,7 @@
     {
       "cols": [
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/302/",
           "other": [
             {
               "url": "http://swagger.io/",
@@ -308,7 +329,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/404/",
           "other": [
             {
               "url": "https://www.appdynamics.com/",
@@ -321,7 +342,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/207/",
           "other": [
             {
               "url": "https://www.appdynamics.com/",
@@ -338,7 +359,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/205/",
           "other": [
             {
               "url": "https://www.appdynamics.com/",
@@ -351,7 +372,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/204/",
           "other": [
             {
               "url": "https://chrome.google.com/webstore/search/isitup%20naveen?hl=en",
@@ -364,7 +385,7 @@
           ]
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
+          "healthUrl": "https://httpstat.us/203/",
           "other": [
             {
               "url": "https://chrome.google.com/webstore/search/isitup%20naveen?hl=en",
@@ -406,9 +427,8 @@
           "healthUrl": ""
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
-          "other": [
-          ]
+          "healthUrl": "https://httpstat.us/201/",
+          "other": []
         },
         {
           "healthUrl": ""
@@ -420,12 +440,10 @@
           "healthUrl": ""
         },
         {
-          "healthUrl": "http://headers.jsontest.com/",
-          "other": [
-          ]
+          "healthUrl": "https://httpstat.us/202/",
+          "other": []
         }
       ]
     }
-
   ]
 }
